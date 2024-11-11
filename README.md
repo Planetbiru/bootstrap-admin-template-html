@@ -80,7 +80,7 @@ In the `css/style.css` file, you can modify the sidebar color by adjusting the f
 
 ### Add New Menu Item:
 
-To add a new item to the sidebar menu, simply update the index.html file under the sidebar <ul> section:
+To add a new item to the sidebar menu, simply update the index.html file under the sidebar `script` section:
 
 ```js
     // Notification data from the server in JSON format
