@@ -186,11 +186,17 @@ Feel free to fork the repository and submit pull requests if you have improvemen
 3. Make your changes and test them.
 4. Submit a pull request with a description of your changes.
 
+## External Link
+
+- Link to MagicAppBuilder - https://github.com/Planetbiru/MagicAppBuilder
+- Link to MagicApp - https://github.com/Planetbiru/MagicApp
+- Link to MagicObject - https://github.com/Planetbiru/MagicObject
+
+
+
 ## License
 
 This project is licensed under the **MIT License**. You are free to use, modify, and distribute the template, as long as you include the appropriate credit and license.
-
-----------
 
 ## Conclusion
 
