@@ -156,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-
 ## Dependencies
 
 -   **Bootstrap 4**: A front-end framework for building responsive and mobile-first websites.
