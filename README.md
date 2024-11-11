@@ -181,10 +181,10 @@ Feel free to fork the repository and submit pull requests if you have improvemen
 
 ### Steps to contribute:
 
-1.  Fork the repository.
-2.  Create a new branch for your changes.
-3.  Make your changes and test them.
-4.  Submit a pull request with a description of your changes.
+1. Fork the repository.
+2. Create a new branch for your changes.
+3. Make your changes and test them.
+4. Submit a pull request with a description of your changes.
 
 ## License
 
