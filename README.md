@@ -29,7 +29,7 @@ git clone https://github.com/Planetbiru/bootstrap-admin-template-html.git
 2. Directory Structure: The template includes the following key directories and files:
 
 ```bash
-/css          - Contains CSS, JavaScript, and image files
+/css             - Contains CSS, JavaScript, and image files
 /js              - Contains JavaScript files for interactivity
 /index.html      - The main HTML template file (Dashboard)
 /profile.html    - User Profile page
