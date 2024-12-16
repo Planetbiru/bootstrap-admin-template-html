@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="css/font-awesome/all.min.css">
     <link rel="stylesheet" href="css/css.css">
     <link rel="shortcut icon" href="css/favicon.png" type="image/png">
+    <script src="js/MultiSelect.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('select[multiple]').forEach(select => new MultiSelect(select));
+        });
+    </script>
 </head>
 <body class="light-mode"> <!-- Using the light mode class initially -->
 
@@ -117,8 +123,39 @@
             </ul>
         </div>
     </nav>
-    <h2>Main Content</h2> <!-- Main content title -->
-    <p>This is the main content area of the dashboard.</p> <!-- Main content description -->
+    <h2>Form</h2> <!-- Main content title -->
+    <form action="" method="get">
+        <table class="responsive-table two-side-responsive-table">
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td><input class="form-control" type="text" name="name" id="name"></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td><select class="form-control" name="gender" id="gender">
+                        <option value="M">Man</option>
+                        <option value="W">Woman</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td>Languages</td>
+                    <td><select class="form-control" name="languages" id="languages" multiple data-multi-select>
+                        <option value="EN">English</option>
+                        <optgroup label="Asia">
+                            <option value="ID">Indonesian</option>
+                            <option value="JV">Javanese</option>
+                            <option value="JP">Japanese</option>
+                        </optgroup>
+                        <optgroup label="Europa">
+                            <option value="DE">Germany</option>
+                        </optgroup>
+                    </select>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
 </div>
 
 <!-- Importing JavaScript for Bootstrap and jQuery -->
