@@ -1705,12 +1705,17 @@ function initDatetimePicker() {
 
   // Initialize date-picker if there are inputs with the class 'date-picker'
   if ($('.date-picker').length) {
-    $('.date-picker').datetimepicker({
-      format: 'YYYY-MM-DD',
-      debug: debugDatetimePicker
-    }).on('dp.change', function (e) {
-      // Hide datetimepicker after selecting a date
-      $(this).datetimepicker('hide');
+    $('.date-picker').each(function() {
+      var minDate = $(this).data('mindate') || false;
+      var maxDate = $(this).data('maxdate') || false;
+      $(this).datetimepicker({
+        minDate: minDate,
+        maxDate: maxDate,
+        format: 'YYYY-MM-DD',
+        debug: debugDatetimePicker
+      }).on('dp.change', function (e) {
+        $(this).datetimepicker('hide');
+      });
     });
   }
 
@@ -1720,22 +1725,24 @@ function initDatetimePicker() {
       format: 'HH:mm:ss',
       debug: debugDatetimePicker
     }).on('dp.change', function (e) {
-      // Hide datetimepicker after selecting a time
       $(this).datetimepicker('hide');
     });
   }
 
   // Initialize date-time-picker if there are inputs with the class 'date-time-picker'
   if ($('.date-time-picker').length) {
-    let d = new Date();
-    d.setHours(0, 0, 0);
-    $('.date-time-picker').datetimepicker({
-      format: 'YYYY-MM-DD HH:mm:ss',
-      useCurrent: 'day',
-      debug: debugDatetimePicker
-    }).on('dp.change', function (e) {
-      // Hide datetimepicker after selecting a date/time
-      $(this).datetimepicker('hide');
+    $('.date-time-picker').each(function() {
+      var minDate = $(this).data('mindate') || false;
+      var maxDate = $(this).data('maxdate') || false;
+      $(this).datetimepicker({
+        minDate: minDate,
+        maxDate: maxDate,
+        format: 'YYYY-MM-DD HH:mm:ss',
+        useCurrent: 'day',
+        debug: debugDatetimePicker
+      }).on('dp.change', function (e) {
+        $(this).datetimepicker('hide');
+      });
     });
   }
 }
@@ -1796,7 +1803,6 @@ function updateOrderUrl(queryString)
   const urlParams = new URLSearchParams(queryString);
   const orderby = urlParams.get('orderby');
   const ordertype = urlParams.get('ordertype');
-
 
   if(typeof orderby != 'undefined')
   {
