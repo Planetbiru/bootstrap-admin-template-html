@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="css/css.css">
     <link rel="shortcut icon" href="css/favicon.png" type="image/png">
     <script src="js/MultiSelect.js"></script>
+    
+    <link rel="stylesheet" href="vendors/datetime-picker/bootstrap-datetimepicker.css">
+    
+    <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
+    <script src="vendors/moment/min/moment.min.js"></script>
+    <script src="vendors/datetime-picker/bootstrap-datetimepicker.js"></script>
+    <script src="js/custom.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('select[multiple]').forEach(select => new MultiSelect(select));
@@ -79,7 +86,7 @@
 
 <!-- Main Content -->
 <div class="content">
-    <nav class="navbar navbar-expand navbar-light bg-light"> <!-- Navbar at the top -->
+    <nav class="navbar navbar-expand navbar-light"> <!-- Navbar at the top -->
         <button class="btn btn-outline-secondary toggle-sidebar"><i class="fas fa-bars"></i></button> <!-- Button to toggle sidebar -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto"> <!-- Menu on the right side of the navbar -->
@@ -139,6 +146,14 @@
                     </select></td>
                 </tr>
                 <tr>
+                    <td>Birth Date</td>
+                    <td><input class="form-control" type="date" name="birth_date" id="birth_date"></td>
+                </tr>
+                <tr>
+                    <td>Time Register</td>
+                    <td><input class="form-control" type="datetime-local" name="time_register" id="time_register"></td>
+                </tr>
+                <tr>
                     <td>Address</td>
                     <td><textarea class="form-control" name="address" id="address"></textarea></td>
                 </tr>
@@ -191,7 +206,6 @@
 </div>
 
 <!-- Importing JavaScript for Bootstrap and jQuery -->
-<script src="js/jquery-3.5.1.slim.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>

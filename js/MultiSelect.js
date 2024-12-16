@@ -13,9 +13,9 @@ class MultiSelect {
             dropdownWidth: '',
             dropdownHeight: '',
             data: [],
-            onChange: function() {},
-            onSelect: function() {},
-            onUnselect: function() {}
+            onChange: function () { },
+            onSelect: function () { },
+            onUnselect: function () { }
         };
         this.options = Object.assign(defaults, options);
         this.selectElement = typeof element === 'string' ? document.querySelector(element) : element;
@@ -61,9 +61,9 @@ class MultiSelect {
         let optionsHTML = ''; // HTML for optgroup
         let nonSelectAllOptionsHTML = '';  // HTML for non-optgroup options
         let selectAllHTML = ''; // HTML for Select All
-        
+
         let underOptgroupHTML = '';
-    
+
         // Loop to process data
         for (let i = 0; i < this.data.length; i++) {
             if (this.data[i].groupLabel) {
@@ -71,7 +71,7 @@ class MultiSelect {
                 optionsHTML += `<div class="multi-select-optgroup">
                     <span class="multi-select-optgroup-label">${this.data[i].groupLabel}</span>
                     <div class="multi-select-optgroup-options">`;
-    
+
                 // Loop through each option in the optgroup
                 for (let j = 0; j < this.data[i].options.length; j++) {
                     underOptgroupHTML += `
@@ -97,7 +97,7 @@ class MultiSelect {
                 `;
             }
         }
-            
+
         // If 'Select All' is enabled, add HTML for Select All
         if (this.options.selectAll === true || this.options.selectAll === 'true') {
             selectAllHTML = `<div class="multi-select-all">
@@ -105,8 +105,8 @@ class MultiSelect {
                 <span class="multi-select-option-text">Select all</span>
             </div>`;
         }
-        
-    
+
+
         // Combine all HTML into one template
         let template = `
             <div class="multi-select ${this.name}"${this.selectElement.id ? ' id="' + this.selectElement.id + '"' : ''} style="${this.width ? 'width:' + this.width + ';' : ''}${this.height ? 'height:' + this.height + ';' : ''}">
@@ -125,12 +125,12 @@ class MultiSelect {
                 </div>
             </div>
         `;
-        
+
         let element = document.createElement('div');
         element.innerHTML = template;
         return element;
     }
-    
+
 
     _eventHandlers() {
         let headerElement = this.element.querySelector('.multi-select-header');
@@ -151,25 +151,21 @@ class MultiSelect {
                         }
                     }
                     this.element.querySelector('.multi-select').insertAdjacentHTML('afterbegin', `<input type="hidden" name="${this.name}[]" value="${option.dataset.value}">`);
-                    try
-                    {
-                    this.data.filter(data => data.value == option.dataset.value)[0].selected = true;
+                    try {
+                        this.data.filter(data => data.value == option.dataset.value)[0].selected = true;
                     }
-                    catch(e)
-                    {
-                        
+                    catch (e) {
+
                     }
                 } else {
                     option.classList.remove('multi-select-selected');
                     this.element.querySelectorAll('.multi-select-header-option').forEach(headerOption => headerOption.dataset.value == option.dataset.value ? headerOption.remove() : '');
                     this.element.querySelector(`input[value="${option.dataset.value}"]`).remove();
-                    try
-                    {
+                    try {
                         this.data.filter(data => data.value == option.dataset.value)[0].selected = false;
                     }
-                    catch(e)
-                    {
-                        
+                    catch (e) {
+
                     }
                     selected = false;
                 }
@@ -219,7 +215,7 @@ class MultiSelect {
                 this.element.querySelectorAll('.multi-select-option').forEach(option => {
                     let dataItem = this.data.find(data => data.value == option.dataset.value);
                     option.click();
-                    
+
                 });
                 selectAllButton.classList.toggle('multi-select-selected');
             };
@@ -240,7 +236,7 @@ class MultiSelect {
 
     _updateSelected() {
         const headerElement = this.element.querySelector('.multi-select-header');
-        
+
         // If listAll is true, we update the selected options
         if (this.options.listAll === true || this.options.listAll === 'true') {
             // Update selected options for the header
@@ -257,18 +253,18 @@ class MultiSelect {
                 this.element.querySelector('.multi-select-header').insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option">${this.selectedValues.length} selected</span>`);
             }
         }
-    
+
         // Remove all placeholders (if there are multiple) before adding the new one
         this.element.querySelectorAll('.multi-select-header-placeholder').forEach(placeholder => {
             placeholder.remove();
         });
-    
+
         // Add a new placeholder if there are no selected options
         if (!this.element.querySelector('.multi-select-header-option')) {
             headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-placeholder">${this.placeholder}</span>`);
         }
     }
-    
+
 
     get selectedValues() {
         return this.data.flatMap(item => item.options ? item.options.filter(option => option.selected).map(option => option.value) : []);
