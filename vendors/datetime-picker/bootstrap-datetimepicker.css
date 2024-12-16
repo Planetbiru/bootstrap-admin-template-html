@@ -449,7 +449,8 @@
   content: "\f073";
 }
 
-.input-datetime-wrapper.date-time::after, .input-datetime-wrapper.time::after {
+.input-datetime-wrapper.date-time::after,
+.input-datetime-wrapper.time::after {
   content: "\f017";
 }
 

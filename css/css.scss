@@ -21,6 +21,7 @@ $color-option-selected: #ffffff;
 $color-dark-border: #666666;
 $color-border-dark-2: #444444;
 $color-dark-checkbox: #a7a7a7;
+$color-input-dark2: #e4e4e4;
 
 // Body styles
 body {
@@ -73,25 +74,27 @@ body {
   transform: translateX(-240px);
 }
 
-.sidebar h4{
+.sidebar h4 {
   font-size: 1.25rem;
-  a{
+
+  a {
     display: block;
-    &:hover{
+
+    &:hover {
       text-decoration: none;
     }
   }
 }
 
 // Content styles
-body 
-{
+body {
   .content {
     margin-left: 240px;
     padding: 1rem;
     transition: margin 0.3s ease;
-    h2, h3
-    {
+
+    h2,
+    h3 {
       margin-top: 6px;
       margin-bottom: 6px;
       font-size: 1.75rem;
@@ -172,6 +175,7 @@ body.sidebar-hidden .content {
 .two-side-responsive-table {
   width: 100%;
   border-collapse: collapse;
+
   >tbody {
     >tr {
       >td {
@@ -212,7 +216,7 @@ body.sidebar-hidden .content {
 
 // Multi Select Styles
 
-select[multiple].form-control{
+select[multiple].form-control {
   height: 38px;
 }
 
@@ -249,7 +253,7 @@ select[multiple].form-control{
     }
 
     &.multi-select-header-active {
-      border-color: $color-input-dark;
+      border-color: $color-input-dark2;
 
       &::after {
         transform: translateY(-50%) rotate(180deg);
@@ -384,14 +388,14 @@ select[multiple].form-control{
     }
 
     .multi-select-search {
-      padding: 7px 10px;
+      padding: 5px 10px;
       border: 1px solid $color-border-light;
       border-radius: 5px;
       margin: 10px 10px 5px 10px;
       width: calc(100% - 20px);
       box-sizing: border-box;
       outline: none;
-      font-size: 16px;
+      font-size: 1rem;
 
       &::placeholder {
         color: $color-placeholder;
@@ -427,7 +431,6 @@ select[multiple].form-control{
   }
 
   .multi-select-optgroup-label {
-    font-weight: bold;
     padding-left: 10px;
     margin-bottom: 5px;
   }
