@@ -211,6 +211,11 @@ body.sidebar-hidden .content {
 }
 
 // Multi Select Styles
+
+select[multiple].form-control{
+  height: 38px;
+}
+
 .multi-select {
   display: flex;
   box-sizing: border-box;

@@ -148,6 +148,10 @@ body.sidebar-hidden .content {
     width: 100%;
   }
 }
+select[multiple].form-control {
+  height: 38px;
+}
+
 .multi-select {
   display: flex;
   box-sizing: border-box;

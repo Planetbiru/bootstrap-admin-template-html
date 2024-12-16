@@ -1828,6 +1828,7 @@ function updateOrderUrl(queryString)
 
 jQuery(function ($) {
   initAllData();
+  document.querySelectorAll('select[multiple]').forEach(select => new MultiSelect(select));
   updateOrderUrl(window.location.search);
 });
 function updateNumber(dataToSort) {

@@ -18,11 +18,7 @@
     <script src="vendors/moment/min/moment.min.js"></script>
     <script src="vendors/datetime-picker/bootstrap-datetimepicker.js"></script>
     <script src="js/custom.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('select[multiple]').forEach(select => new MultiSelect(select));
-        });
-    </script>
+
 </head>
 <body class="light-mode"> <!-- Using the light mode class initially -->
 
@@ -198,6 +194,13 @@
                     <td>
                         <label for=""><input type="checkbox" name="blocked" id="active"> Yes</label>
                         <label for=""><input type="checkbox" name="blocked" id="active"> No</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-success" type="submit">Submit</button>
+                        <button class="btn btn-secondary" type="button">Back</button>
                     </td>
                 </tr>
             </tbody>
