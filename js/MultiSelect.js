@@ -207,7 +207,7 @@ class MultiSelect {
             let search = this.element.querySelector('.multi-select-search');
             search.oninput = () => {
                 this.element.querySelectorAll('.multi-select-option').forEach(option => {
-                    option.style.display = option.querySelector('.multi-select-option-text').innerHTML.toLowerCase().indexOf(search.value.toLowerCase()) > -1 ? 'flex' : 'none';
+                    option.parentNode.style.display = option.querySelector('.multi-select-option-text').innerHTML.toLowerCase().indexOf(search.value.toLowerCase()) > -1 ? 'flex' : 'none';
                 });
             };
         }
