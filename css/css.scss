@@ -166,17 +166,40 @@ body.sidebar-hidden .content {
 
 /* Table */
 
-.two-side-responsive-table{
+.two-side-responsive-table {
     width: 100%;
     border-collapse: collapse;
-    tr td{
-        padding: 5px 0;
-        &:nth-child(1)
-        {
-            width: 240px;
-        }
+  
+    tr td {
+      padding: 5px 0;
+  
+      &:nth-child(1) {
+        width: 240px;
+      }
     }
-}
+  
+    // Media query for screens smaller than 601px
+    @media (max-width: 600px) {
+      width: 100%;
+      display: table;
+  
+      tr {
+        display: block;  // Make each table row behave like a block
+        width: 100%;  // Rows take full width
+      }
+  
+      td {
+        display: block;  // Each cell behaves like a block element
+        width: 100%;  // Cells take full width of their row
+        box-sizing: border-box;
+      }
+  
+      td:nth-child(1) {
+        width: 100%;  // Make the first column take full width
+      }
+    }
+  }
+  
 
 
 

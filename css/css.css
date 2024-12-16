@@ -158,6 +158,24 @@ body.sidebar-hidden .content {
 .two-side-responsive-table tr td:nth-child(1) {
   width: 240px;
 }
+@media (max-width: 600px) {
+  .two-side-responsive-table {
+    width: 100%;
+    display: table;
+  }
+  .two-side-responsive-table tr {
+    display: block;
+    width: 100%;
+  }
+  .two-side-responsive-table td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .two-side-responsive-table td:nth-child(1) {
+    width: 100%;
+  }
+}
 
 /* Multi Select */
 .multi-select {
