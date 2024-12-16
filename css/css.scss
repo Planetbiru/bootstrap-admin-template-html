@@ -73,11 +73,30 @@ body {
   transform: translateX(-240px);
 }
 
+.sidebar h4{
+  font-size: 1.25rem;
+  a{
+    display: block;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}
+
 // Content styles
-body .content {
-  margin-left: 240px;
-  padding: 1rem;
-  transition: margin 0.3s ease;
+body 
+{
+  .content {
+    margin-left: 240px;
+    padding: 1rem;
+    transition: margin 0.3s ease;
+    h2, h3
+    {
+      margin-top: 6px;
+      margin-bottom: 6px;
+      font-size: 1.75rem;
+    }
+  }
 }
 
 body.sidebar-hidden .content {
