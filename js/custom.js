@@ -223,15 +223,7 @@ function initOrderUrl(queryString)
   }
 }
 
-jQuery(function ($) {
-  initCheckAll();
-  initAjaxSupport();
-  initDatetimePicker();
-  initMultipleSelect();
-  initSortTable();
-  initSortData(window.location.search);
-  initOrderUrl(window.location.search);
-});
+
 function updateNumber(dataToSort) {
   let frm = dataToSort.closest("form");
   if (frm.find("span.new-sort-order").length) {
@@ -269,3 +261,12 @@ function splitWithTail(str, delimiter, count) {
   result.push(tail);
   return result;
 }
+jQuery(function ($) {
+  initCheckAll();
+  initAjaxSupport();
+  initDatetimePicker();
+  initMultipleSelect();
+  initSortTable();
+  initSortData(window.location.search);
+  initOrderUrl(window.location.search);
+});
