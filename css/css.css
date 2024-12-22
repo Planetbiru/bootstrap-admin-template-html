@@ -103,9 +103,25 @@ body.sidebar-hidden .content {
   transition: background-color 0.5s;
   padding: 0rem 0rem;
 }
+.navbar .nav-item[data-badge]:not([data-badge=""])::before {
+  content: attr(data-badge);
+  position: absolute;
+  background-color: rgb(231, 0, 0);
+  color: white;
+  font-size: 10px;
+  border-radius: 3px;
+  text-align: center;
+  padding: 2px 3px;
+  line-height: 1;
+  top: -3px;
+  right: 8px;
+  display: block;
+  min-width: 16px;
+}
 
 .language-flag {
   width: 20px;
+  height: 20px;
   margin-right: 5px;
 }
 
@@ -241,23 +257,16 @@ thead .data-sort-header {
 .table-row td {
   white-space: nowrap;
   position: relative;
+  padding: 0.5rem 0.6rem;
 }
 
 .table-row thead td a {
   padding-right: 6px;
 }
 
-.table-row td {
-  padding: 0.35rem 0.6rem;
-}
-
 td[data-order-method=asc],
 td[data-order-method=desc] {
   padding: 0.5rem 1.2rem 0.5rem 0.6rem;
-}
-
-.table-row td {
-  padding: 0.5rem 0.6rem;
 }
 
 [data-order-method=asc]::before {
@@ -311,10 +320,15 @@ select[multiple].form-control {
 .multi-select .multi-select-header {
   border-radius: 3px;
   border: 1px solid #dee2e6;
-  padding: 3px 30px 3px 3px;
+  padding: 4px 30px 4px 4px;
   overflow: hidden;
   gap: 7px;
   min-height: calc(1.5em + 0.75rem + 2px);
+}
+.multi-select .multi-select-header > span {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 .multi-select .multi-select-header::after {
   content: "";
@@ -336,15 +350,15 @@ select[multiple].form-control {
 .multi-select .multi-select-header.multi-select-header-active + .multi-select-options {
   display: block;
 }
-.multi-select .multi-select-header .multi-select-header-placeholder {
-  padding-left: 4px;
-}
+.multi-select .multi-select-header .multi-select-header-placeholder,
 .multi-select .multi-select-header .multi-select-header-option {
-  display: inline-flex;
-  align-items: center;
-  background-color: #f3f4f7;
+  display: inline-block;
   font-size: 15px;
   padding: 3px 8px;
+  margin-right: 4px;
+}
+.multi-select .multi-select-header .multi-select-header-option {
+  background-color: #f3f4f7;
   border-radius: 3px;
 }
 .multi-select .multi-select-header .multi-select-header-max {
@@ -359,8 +373,8 @@ select[multiple].form-control {
   flex-flow: wrap;
   position: absolute;
   top: 100%;
-  left: 0px;
-  right: 0px;
+  left: 2px;
+  right: 2px;
   z-index: 999;
   margin-top: 0px;
   padding: 2px 1px;
@@ -384,7 +398,7 @@ select[multiple].form-control {
 }
 .multi-select .multi-select-options .multi-select-option,
 .multi-select .multi-select-options .multi-select-all {
-  padding: 0px 12px;
+  padding: 6px 12px;
   height: 32px;
 }
 .multi-select .multi-select-options .multi-select-option .multi-select-option-radio,
@@ -394,6 +408,7 @@ select[multiple].form-control {
   width: 16px;
   border: 1px solid #4f4f4f;
   border-radius: 4px;
+  display: inline-block;
 }
 .multi-select .multi-select-options .multi-select-option .multi-select-option-text,
 .multi-select .multi-select-options .multi-select-all .multi-select-option-text {
@@ -429,7 +444,6 @@ select[multiple].form-control {
   background-color: #f3f4f7;
 }
 .multi-select .multi-select-options .multi-select-all {
-  border-bottom: 1px solid #dee2e6;
   border-radius: 0;
 }
 .multi-select .multi-select-options .multi-select-all:hover, .multi-select .multi-select-options .multi-select-all:active {
@@ -451,19 +465,12 @@ select[multiple].form-control {
 .multi-select .multi-select-options .multi-select-search::placeholder {
   color: #b2b5b9;
 }
-.multi-select .multi-select-header {
-  padding: 0px 8px;
-}
 .multi-select .multi-select-header,
 .multi-select .multi-select-option,
 .multi-select .multi-select-all {
-  display: flex;
-  flex-wrap: wrap;
   box-sizing: border-box;
-  align-items: center;
   cursor: pointer;
-  display: flex;
-  align-items: center;
+  display: block;
   width: 100%;
   font-size: 16px;
 }
@@ -484,6 +491,8 @@ select[multiple].form-control {
 .multi-select .multi-select-options-container {
   height: 140px;
   overflow-y: auto;
+  border-top: 1px solid #dee2e6;
+  margin-top: 5px;
 }
 
 a {

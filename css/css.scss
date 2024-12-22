@@ -29,8 +29,6 @@ body {
   transition: background-color 0.5s, color 0.5s;
 }
 
-
-
 // Sidebar styles
 .sidebar {
   height: 100vh;
@@ -154,12 +152,33 @@ body.sidebar-hidden .content {
 .navbar {
   transition: background-color 0.5s;
   padding: 0rem 0rem;
+
+  .nav-item[data-badge]:not([data-badge=""])::before {
+    content: attr(data-badge);
+    position: absolute;
+    background-color: rgb(231, 0, 0);
+    color: white;
+    font-size: 10px;
+    border-radius: 3px;
+    text-align: center;
+    padding: 2px 3px;
+    line-height: 1;
+    top: -3px;
+    right: 8px;
+    display: block;
+    min-width: 16px;
+  }
 }
 
 .language-flag {
   width: 20px;
+  height: 20px;
   margin-right: 5px;
 }
+
+
+
+
 
 // Additional navbar and dropdown styles
 .dark-mode .navbar-nav .nav-link .fas,
@@ -215,6 +234,7 @@ body.sidebar-hidden .content {
     }
   }
 }
+
 
 
 // Pagination
@@ -298,10 +318,11 @@ body.sidebar-hidden .content {
 
 // Sort Table
 
-.data-wrapper{
+.data-wrapper {
   overflow-x: auto;
   margin-bottom: 10px;
-  .table{
+
+  .table {
     margin-bottom: 0;
   }
 }
@@ -317,20 +338,18 @@ thead .data-sort-header {
   background-color: #abadb6;
   cursor: move;
 }
-.table-row td
-{
-  white-space: nowrap;
-  position: relative;
-}
-.table-row thead td {
-  
-  a{
-    padding-right: 6px;
-  }
-}
 
 .table-row td {
-  padding: 0.35rem 0.6rem;
+  white-space: nowrap;
+  position: relative;
+  padding: 0.5rem 0.6rem;
+}
+
+.table-row thead td {
+
+  a {
+    padding-right: 6px;
+  }
 }
 
 td[data-order-method="asc"],
@@ -338,9 +357,6 @@ td[data-order-method="desc"] {
   padding: 0.5rem 1.2rem 0.5rem 0.6rem;
 }
 
-.table-row td {
-  padding: 0.5rem 0.6rem;
-}
 
 [data-order-method="asc"]::before {
   right: 6px;
@@ -398,10 +414,16 @@ select[multiple].form-control {
   .multi-select-header {
     border-radius: 3px;
     border: 1px solid $color-border-light;
-    padding: 3px 30px 3px 3px;
+    padding: 4px 30px 4px 4px;
     overflow: hidden;
     gap: 7px;
     min-height: calc(1.5em + .75rem + 2px);
+
+    &>span {
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+    }
 
     &::after {
       content: "";
@@ -427,16 +449,17 @@ select[multiple].form-control {
       }
     }
 
-    .multi-select-header-placeholder {
-      padding-left: 4px;
+    .multi-select-header-placeholder,
+
+    .multi-select-header-option {
+      display: inline-block;
+      font-size: 15px;
+      padding: 3px 8px;
+      margin-right: 4px;
     }
 
     .multi-select-header-option {
-      display: inline-flex;
-      align-items: center;
       background-color: $color-background-light;
-      font-size: 15px;
-      padding: 3px 8px;
       border-radius: 3px;
     }
 
@@ -449,14 +472,17 @@ select[multiple].form-control {
     }
   }
 
+
+
+
   .multi-select-options {
     display: none;
     box-sizing: border-box;
     flex-flow: wrap;
     position: absolute;
     top: 100%;
-    left: 0px;
-    right: 0px;
+    left: 2px;
+    right: 2px;
     z-index: 999;
     margin-top: 0px;
     padding: 2px 1px;
@@ -484,7 +510,7 @@ select[multiple].form-control {
 
     .multi-select-option,
     .multi-select-all {
-      padding: 0px 12px;
+      padding: 6px 12px;
       height: 32px;
     }
 
@@ -495,6 +521,7 @@ select[multiple].form-control {
       width: 16px;
       border: 1px solid $color-input-dark;
       border-radius: 4px;
+      display: inline-block;
     }
 
     .multi-select-option .multi-select-option-text,
@@ -546,7 +573,6 @@ select[multiple].form-control {
         background-color: $color-option-hover;
       }
 
-      border-bottom: 1px solid $color-border-light;
       border-radius: 0;
     }
 
@@ -566,20 +592,14 @@ select[multiple].form-control {
     }
   }
 
-  .multi-select-header {
-    padding: 0px 8px;
-  }
+
 
   .multi-select-header,
   .multi-select-option,
   .multi-select-all {
-    display: flex;
-    flex-wrap: wrap;
     box-sizing: border-box;
-    align-items: center;
     cursor: pointer;
-    display: flex;
-    align-items: center;
+    display: block;
     width: 100%;
     font-size: 16px;
   }
@@ -605,6 +625,9 @@ select[multiple].form-control {
   .multi-select-options-container {
     height: 140px;
     overflow-y: auto;
+    border-top: 1px solid $color-border-light;
+    margin-top: 5px;
+
   }
 }
 
@@ -689,6 +712,7 @@ a {
       border-color: $color-border-dark-2;
       border-radius: 0;
     }
+
 
     .multi-select-option {
 
