@@ -1,4 +1,39 @@
+/**
+ * MultiSelect Class - A custom select input with multiple selection and advanced features.
+ * 
+ * This class provides an enhanced multi-select dropdown with features like search, select all, 
+ * displaying selected items, and custom options. It is designed to work with an HTML <select> element 
+ * and replaces the standard select with a custom dropdown UI.
+ * 
+ * @class MultiSelect
+ */
 class MultiSelect {
+
+    /**
+     * Creates an instance of the MultiSelect.
+     * 
+     * @constructor
+     * @param {HTMLElement|string} element - The DOM element or selector of the <select> element.
+     * @param {Object} [options={}] - Optional configuration object.
+     * @param {string} [options.placeholder='Select item(s)'] - Placeholder text when no items are selected.
+     * @param {string} [options.searchPlaceholder='Search...'] - Placeholder text for the search input.
+     * @param {string} [options.labelSelectAll='Select all'] - Label for the "Select All" option.
+     * @param {string} [options.labelSelected='selected'] - Label for the selected items.
+     * @param {number} [options.max=null] - Maximum number of items that can be selected.
+     * @param {boolean} [options.search=true] - Whether to enable search functionality.
+     * @param {boolean} [options.selectAll=true] - Whether to enable the "Select All" option.
+     * @param {boolean} [options.listAll=true] - Whether to show all selected items in the header.
+     * @param {boolean} [options.closeListOnItemSelect=false] - Whether to close the dropdown when an item is selected.
+     * @param {string} [options.name=''] - The name attribute for the select element.
+     * @param {string} [options.width=''] - Width of the multi-select dropdown.
+     * @param {string} [options.height=''] - Height of the multi-select dropdown.
+     * @param {string} [options.dropdownWidth=''] - Dropdown width override.
+     * @param {string} [options.dropdownHeight=''] - Dropdown height override.
+     * @param {Array} [options.data=[]] - Array of data for options, each having a value, text, and other properties.
+     * @param {function} [options.onChange] - Callback function triggered on any change in selection.
+     * @param {function} [options.onSelect] - Callback function triggered when an option is selected.
+     * @param {function} [options.onUnselect] - Callback function triggered when an option is unselected.
+     */
     constructor(element, options = {}) {
         let defaults = {
             placeholder: 'Select item(s)',
@@ -60,11 +95,23 @@ class MultiSelect {
         this._eventHandlers();
     }
 
+    /**
+     * Retrieves the name of the select element or generates a random name if not available.
+     * 
+     * @private
+     * @returns {string} The name of the select element.
+     */
     _getName()
     {
         return this.selectElement.getAttribute('name') ? this.selectElement.getAttribute('name') : 'multi-select-' + Math.floor(Math.random() * 1000000);
     }
 
+    /**
+     * Generates the HTML template for the multi-select dropdown.
+     * 
+     * @private
+     * @returns {HTMLElement} The generated HTML element representing the multi-select dropdown.
+     */
     _template() {
         let optionsHTML = ''; // HTML for optgroup
         let nonSelectAllOptionsHTML = '';  // HTML for non-optgroup options
@@ -86,7 +133,7 @@ class MultiSelect {
                         <div class="multi-select-option-container">
                             <div class="multi-select-option${this._getSelectedClass(option.value)}" data-value="${option.value}">
                                 <span class="multi-select-option-radio"></span>
-                                <span class="multi-select-option-text">${_getText(option)}</span>
+                                <span class="multi-select-option-text">${this._getText(option)}</span>
                             </div>
                         </div>
                     `;
@@ -105,7 +152,6 @@ class MultiSelect {
                 `;
             }
         }
-
 
         // If 'Select All' is enabled, add HTML for Select All
         if (this.options.selectAll === true || this.options.selectAll === 'true') {
@@ -141,22 +187,48 @@ class MultiSelect {
         return element;
     }
 
+    /**
+     * Retrieves the text for an option, prioritizing the HTML value if available.
+     * 
+     * @private
+     * @param {Object} option - The option data object.
+     * @returns {string} The text of the option.
+     */
     _getText(option)
     {
         return `${option.html ? option.html : option.text}`;
     }
 
+    /**
+     * Returns the appropriate class based on whether an option is selected.
+     * 
+     * @private
+     * @param {string} value - The value of the option.
+     * @returns {string} The class to be applied to the option.
+     */
     _getSelectedClass(value)
     {
         return `${this.selectedValues.includes(value) ? ' multi-select-selected' : ''}`;
     }
 
+    /**
+     * Retrieves the dimension styles (width and height) for the multi-select dropdown.
+     * 
+     * @private
+     * @returns {string} The CSS style string for the dimensions.
+     */
     _getDimension()
     {
         return `${this.width ? 'width:' + this.width + ';' : ''}${this.height ? 'height:' + this.height + ';' : ''}`;
     }
 
-    _updateOption(selected)
+    /**
+     * Updates the selected options and updates the display in the header.
+     * 
+     * @private
+     * @param {boolean} selected - Indicates whether the option was selected or unselected.
+     */
+    _updateOption(option, selected)
     {
         if (this.options.listAll === false || this.options.listAll === 'false') {
             if (this.element.querySelector('.multi-select-header-option')) {
@@ -185,7 +257,11 @@ class MultiSelect {
         }
     }
 
-
+    /**
+     * Sets up event handlers for various interactions with the multi-select dropdown.
+     * 
+     * @private
+     */
     _eventHandlers() {
         let headerElement = this.element.querySelector('.multi-select-header');
         this.element.querySelectorAll('.multi-select-option').forEach(option => {
@@ -194,7 +270,7 @@ class MultiSelect {
                 let selected = true;
                 
                 if (!option.classList.contains('multi-select-selected')) {
-                    if (this.options.max && this.selectedValues.length >= this.options.max) {
+                    if (this._isMax()) {
                         return;
                     }
                     option.classList.add('multi-select-selected');
@@ -216,7 +292,11 @@ class MultiSelect {
                 } else {
                     option.classList.remove('multi-select-selected');
                     this.element.querySelectorAll('.multi-select-header-option').forEach(headerOption => headerOption.dataset.value == option.dataset.value ? headerOption.remove() : '');
-                    this.element.querySelector(`input[value="${option.dataset.value}"]`).remove();
+                    let elem = this.element.querySelector(`input[value="${option.dataset.value}"]`);
+                    if(elem != null)
+                    {
+                        elem.parentNode.removeChild(elem);
+                    }
                     try {
                         this.data.filter(data => data.value == option.dataset.value)[0].selected = false;
                     }
@@ -225,7 +305,7 @@ class MultiSelect {
                     }
                     selected = false;
                 }
-                this._updateOption(selected);
+                this._updateOption(option, selected);
             };
         });
 
@@ -253,8 +333,8 @@ class MultiSelect {
                     hiddenInputs.forEach(input => input.remove());
                 }
                 
-                this.element.querySelectorAll('.multi-select-option').forEach(option => {
-                    this.data.find(data => data.value == option.dataset.value);
+                this.element.querySelectorAll('.multi-select-option').forEach((option) => {
+                    let val = this.data.find(data => data.value == option.dataset.value); // NOSONAR
                     if(!allSelected)
                     {
                         option.classList.remove('multi-select-selected');
@@ -278,6 +358,25 @@ class MultiSelect {
         });
     }
 
+    /**
+     * Checks if the maximum number of selected items has been reached.
+     * 
+     * This method compares the current number of selected values with the 
+     * `max` value defined in the options. If the number of selected items 
+     * is greater than or equal to `max`, it returns `true`; otherwise, it returns `false`.
+     * 
+     * @returns {boolean} `true` if the number of selected items is equal to or exceeds the maximum limit, `false` otherwise.
+     */
+    _isMax()
+    {
+        return this.options.max && this.selectedValues.length >= this.options.max;
+    }
+
+    /**
+     * Updates the selected options and refreshes the display in the header.
+     * 
+     * @private
+     */
     _updateSelected() {
         const headerElement = this.element.querySelector('.multi-select-header');
 
@@ -308,91 +407,222 @@ class MultiSelect {
         }
     }
 
-
-    get selectedValues() {
+    /**
+     * Returns an array of selected values.
+     * 
+     * @getter
+     * @returns {Array} Array of selected values from the options.
+     */
+     get selectedValues() {
         return this.data.flatMap(item => item.options ? item.options.filter(option => option.selected).map(option => option.value) : []);
     }
 
+    /**
+     * Returns an array of selected items (options).
+     * 
+     * @getter
+     * @returns {Array} Array of selected option objects.
+     */
     get selectedItems() {
         return this.data.flatMap(item => item.options ? item.options.filter(option => option.selected) : []);
     }
 
+    /**
+     * Sets the data for the multi-select options.
+     * 
+     * @setter
+     * @param {Array} value - The new data array to set. This array should contain objects with options.
+     */
     set data(value) {
         this.options.data = value;
     }
 
+    /**
+     * Returns the current data of the multi-select options.
+     * 
+     * @getter
+     * @returns {Array} The current options data.
+     */
     get data() {
         return this.options.data;
     }
 
+    /**
+     * Sets the select element (original <select> element) that is replaced by the custom multi-select dropdown.
+     * 
+     * @setter
+     * @param {HTMLElement} value - The new select element.
+     */
     set selectElement(value) {
         this.options.selectElement = value;
     }
 
+    /**
+     * Returns the current select element that is used for the multi-select.
+     * 
+     * @getter
+     * @returns {HTMLElement} The current select element.
+     */
     get selectElement() {
         return this.options.selectElement;
     }
 
+    /**
+     * Sets the custom multi-select element (the rendered dropdown).
+     * 
+     * @setter
+     * @param {HTMLElement} value - The new multi-select dropdown element.
+     */
     set element(value) {
         this.options.element = value;
     }
 
+    /**
+     * Returns the current custom multi-select dropdown element.
+     * 
+     * @getter
+     * @returns {HTMLElement} The custom multi-select dropdown element.
+     */
     get element() {
         return this.options.element;
     }
 
+    /**
+     * Sets the placeholder text for the multi-select header when no items are selected.
+     * 
+     * @setter
+     * @param {string} value - The new placeholder text.
+     */
     set placeholder(value) {
         this.options.placeholder = value;
     }
 
+    /**
+     * Returns the current placeholder text for the multi-select header.
+     * 
+     * @getter
+     * @returns {string} The current placeholder text.
+     */
     get placeholder() {
         return this.options.placeholder;
     }
 
+    /**
+     * Sets the name attribute for the multi-select component.
+     * 
+     * @setter
+     * @param {string} value - The new name for the multi-select component.
+     */
     set name(value) {
         this.options.name = value;
     }
 
+    /**
+     * Returns the current name attribute of the multi-select component.
+     * 
+     * @getter
+     * @returns {string} The current name attribute.
+     */
     get name() {
         return this.options.name;
     }
 
+    /**
+     * Sets the width for the multi-select dropdown.
+     * 
+     * @setter
+     * @param {string} value - The new width for the multi-select dropdown.
+     */
     set width(value) {
         this.options.width = value;
     }
 
+    /**
+     * Returns the current width of the multi-select dropdown.
+     * 
+     * @getter
+     * @returns {string} The current width of the multi-select dropdown.
+     */
     get width() {
         return this.options.width;
     }
 
+    /**
+     * Sets the height for the multi-select dropdown.
+     * 
+     * @setter
+     * @param {string} value - The new height for the multi-select dropdown.
+     */
     set height(value) {
         this.options.height = value;
     }
 
+    /**
+     * Returns the current height of the multi-select dropdown.
+     * 
+     * @getter
+     * @returns {string} The current height of the multi-select dropdown.
+     */
     get height() {
         return this.options.height;
     }
-    
+
+    /**
+     * Sets the placeholder text for the search input inside the multi-select dropdown.
+     * 
+     * @setter
+     * @param {string} value - The new placeholder text for the search input.
+     */
     set searchPlaceholder(value) {
         this.options.searchPlaceholder = value;
     }
 
+    /**
+     * Returns the current placeholder text for the search input inside the multi-select dropdown.
+     * 
+     * @getter
+     * @returns {string} The current placeholder text for the search input.
+     */
     get searchPlaceholder() {
         return this.options.searchPlaceholder;
     }
-    
+
+    /**
+     * Sets the label for the "Select All" option in the multi-select dropdown.
+     * 
+     * @setter
+     * @param {string} value - The new label for the "Select All" option.
+     */
     set labelSelectAll(value) {
         this.options.labelSelectAll = value;
     }
 
+    /**
+     * Returns the current label for the "Select All" option.
+     * 
+     * @getter
+     * @returns {string} The current label for the "Select All" option.
+     */
     get labelSelectAll() {
         return this.options.labelSelectAll;
     }
-    
+
+    /**
+     * Sets the label for the selected options in the multi-select dropdown.
+     * 
+     * @setter
+     * @param {string} value - The new label for selected options.
+     */
     set labelSelected(value) {
         this.options.labelSelected = value;
     }
 
+    /**
+     * Returns the current label for the selected options.
+     * 
+     * @getter
+     * @returns {string} The current label for the selected options.
+     */
     get labelSelected() {
         return this.options.labelSelected;
     }
