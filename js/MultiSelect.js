@@ -223,12 +223,17 @@ class MultiSelect {
     }
 
     /**
-     * Updates the selected options and updates the display in the header.
+     * Removes the hidden input element associated with the given option.
      * 
-     * @private
-     * @param {boolean} selected - Indicates whether the option was selected or unselected.
+     * This method looks for an `input` element with a `value` attribute matching the 
+     * `data-value` of the provided `option`. If such an input element exists, it is 
+     * removed from the DOM. This is typically used to clean up the hidden inputs 
+     * representing selected values in a multi-select component.
+     * 
+     * @param {HTMLElement} option - The option element whose associated hidden input should be removed.
+     * @returns {void} This method does not return any value.
      */
-    _updateOption(option, selected)
+    _updateOption(headerElement, option, selected)
     {
         if (this.options.listAll === false || this.options.listAll === 'false') {
             if (this.element.querySelector('.multi-select-header-option')) {
@@ -303,7 +308,7 @@ class MultiSelect {
                     }
                     selected = false;
                 }
-                this._updateOption(option, selected);
+                this._updateOption(headerElement, option, selected);
             };
         });
 
