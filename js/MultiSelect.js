@@ -2,6 +2,9 @@ class MultiSelect {
     constructor(element, options = {}) {
         let defaults = {
             placeholder: 'Select item(s)',
+            searchPlaceholder: 'Search...',
+            labelSelectAll: 'Select all',
+            labelSelected: 'selected',
             max: null,
             search: true,
             selectAll: true,
@@ -102,7 +105,7 @@ class MultiSelect {
         if (this.options.selectAll === true || this.options.selectAll === 'true') {
             selectAllHTML = `<div class="multi-select-all">
                 <span class="multi-select-option-radio"></span>
-                <span class="multi-select-option-text">Select all</span>
+                <span class="multi-select-option-text">${this.options.labelSelectAll}</span>
             </div>`;
         }
 
@@ -116,11 +119,11 @@ class MultiSelect {
                     <span class="multi-select-header-placeholder">${this.placeholder}</span>
                 </div>
                 <div class="multi-select-options" style="${this.options.dropdownWidth ? 'width:' + this.options.dropdownWidth + ';' : ''}${this.options.dropdownHeight ? 'height:' + this.options.dropdownHeight + ';' : ''}">
-                    ${this.options.search === true || this.options.search === 'true' ? '<input type="text" class="multi-select-search" placeholder="Search...">' : ''}
-                    ${selectAllHTML}  <!-- 'Select All' outside the options list -->
+                    ${this.options.search === true || this.options.search === 'true' ? `<input type="text" class="multi-select-search" placeholder="${this.options.searchPlaceholder}">` : ''}
+                    ${selectAllHTML} 
                     <div class="multi-select-options-container">
-                    <div class="multi-select-options-list">${nonSelectAllOptionsHTML}</div> <!-- Non-'Select All' options -->
-                    <div class="multi-select-optgroup-list">${optionsHTML}</div> <!-- Options inside optgroup -->
+                    <div class="multi-select-options-list">${nonSelectAllOptionsHTML}</div> 
+                    <div class="multi-select-optgroup-list">${optionsHTML}</div> 
                     </div>
                 </div>
             </div>
@@ -329,4 +332,29 @@ class MultiSelect {
     get height() {
         return this.options.height;
     }
+    
+    set searchPlaceholder(value) {
+        this.options.searchPlaceholder = value;
+    }
+
+    get searchPlaceholder() {
+        return this.options.searchPlaceholder;
+    }
+    
+    set labelSelectAll(value) {
+        this.options.labelSelectAll = value;
+    }
+
+    get labelSelectAll() {
+        return this.options.labelSelectAll;
+    }
+    
+    set labelSelected(value) {
+        this.options.labelSelected = value;
+    }
+
+    get labelSelected() {
+        return this.options.labelSelected;
+    }
+    
 }
