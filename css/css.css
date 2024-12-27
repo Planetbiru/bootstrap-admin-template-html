@@ -131,6 +131,15 @@ body.sidebar-hidden .content {
   margin-right: 5px;
 }
 
+.navbar-nav .dropdown-item {
+  display: flex;
+  align-items: center;
+}
+.navbar-nav .dropdown-item .text-muted {
+  margin-left: auto;
+  padding-left: 6px;
+}
+
 .dark-mode .navbar-nav .nav-link .fas,
 .dark-mode .navbar-nav .btn .fas,
 .dark-mode .navbar-nav .nav-link {

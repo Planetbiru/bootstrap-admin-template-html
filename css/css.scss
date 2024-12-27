@@ -175,9 +175,18 @@ body.sidebar-hidden .content {
 }
 
 .language-flag {
-  width: 20px;  // Width of language flag
-  height: 20px;  // Height of language flag
-  margin-right: 5px;  // Margin between flag and text
+  width: 20px; 
+  height: 20px;  
+  margin-right: 5px;  
+}
+
+.navbar-nav .dropdown-item{
+  display: flex;           
+  align-items: center;     
+ .text-muted {
+    margin-left: auto;
+    padding-left: 6px;     
+  }
 }
 
 // Dark mode adjustments for navbar
