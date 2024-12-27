@@ -1,162 +1,166 @@
-// Color variables
-$color-light: #f8f9fa;
-$color-dark: #212529;
-$color-gray: #343a40;
-$color-hover: #495057;
-$color-link: #FAFAFA;
-$color-selected: #2761a3;
-$color-input: #dee2e6;
-$color-input-dark: #4f4f4f;
-$color-background-dark: #212529;
-$color-background-light: #f3f4f7;
-$color-border-light: #dee2e6;
-$color-border-dark: #212529;
-$color-text-light: #212529;
-$color-text-dark: #f8f9fa;
-$color-gray-light: #6d6d6d;
-$color-gray-dark: #5c5c5c;
-$color-placeholder: #b2b5b9;
-$color-option-hover: #f3f4f7;
-$color-option-selected: #ffffff;
-$color-dark-border: #666666;
-$color-border-dark-2: #444444;
-$color-dark-checkbox: #a7a7a7;
-$color-input-dark2: #e4e4e4;
+// Color variables for different UI elements
+$color-light: #f8f9fa;  // Light background color
+$color-dark: #212529;   // Dark background color
+$color-gray: #343a40;   // Gray color for sidebar and borders
+$color-hover: #495057;  // Color on hover
+$color-link: #FAFAFA;   // Link color
+$color-selected: #2761a3;  // Color for selected items
+$color-input: #dee2e6;   // Input fields color
+$color-input-dark: #4f4f4f;  // Dark input field color
+$color-background-dark: #212529;  // Dark background color
+$color-background-light: #f3f4f7;  // Light background color
+$color-border-light: #dee2e6;  // Light border color
+$color-border-dark: #212529;  // Dark border color
+$color-text-light: #212529;  // Light text color
+$color-text-dark: #f8f9fa;  // Dark text color
+$color-gray-light: #6d6d6d;  // Light gray color
+$color-gray-dark: #5c5c5c;   // Dark gray color
+$color-placeholder: #b2b5b9;  // Placeholder text color
+$color-option-hover: #f3f4f7;  // Hover color for options
+$color-option-selected: #ffffff;  // Selected option color
+$color-dark-border: #666666;  // Dark border color
+$color-border-dark-2: #444444;  // Secondary dark border color
+$color-dark-checkbox: #a7a7a7;  // Dark checkbox color
+$color-input-dark2: #e4e4e4;  // Darker input color
 
-// Body styles
+// Body styles with transition effects
 body {
-  overflow-x: hidden;
-  transition: background-color 0.5s, color 0.5s;
+  overflow-x: hidden;  // Hide horizontal overflow
+  transition: background-color 0.5s, color 0.5s;  // Smooth transition for color and background changes
+
+  .content {
+    margin-left: 240px;  // Sidebar space
+    padding: 1rem;  // Padding around the content
+    transition: margin 0.3s ease;  // Smooth transition when margin changes
+
+    h2, h3 {
+      margin-top: 6px;
+      margin-bottom: 6px;
+      font-size: 1.75rem;  // Font size for headings
+    }
+  }
+}
+
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+// Link styles
+a {
+  color: #2964a4;  // Default link color
 }
 
 // Sidebar styles
 .sidebar {
-  height: 100vh;
-  width: 240px;
-  background: $color-gray;
-  position: fixed;
-  padding-top: 20px;
-  transition: transform 0.3s ease;
-  transform: translateX(0);
+  height: 100vh;  // Full viewport height
+  width: 240px;  // Sidebar width
+  background: $color-gray;  // Sidebar background color
+  position: fixed;  // Fixed position on the screen
+  padding-top: 20px;  // Padding on top of the sidebar
+  transition: transform 0.3s ease;  // Smooth transition for sidebar movement
+  transform: translateX(0);  // Initially positioned at the left side of the screen
 
   a {
-    color: $color-link;
+    color: $color-link;  // Link color in sidebar
   }
 
   .nav-link:hover {
-    background-color: $color-hover;
+    background-color: $color-hover;  // Hover effect on navigation links
   }
 
   .button-transparent {
-    background-color: transparent;
+    background-color: transparent;  // Transparent button background
     border: none;
     outline: none;
 
-    &:focus,
-    &:focus-visible,
-    &:active {
-      outline: none;
+    &:focus, &:focus-visible, &:active {
+      outline: none;  // Remove outline when focused or active
     }
   }
 
   .toggle-sidebar {
     float: right;
     margin-right: 10px;
-    display: none;
+    display: none;  // Sidebar toggle is hidden by default
 
     * {
-      color: $color-link;
+      color: $color-link;  // Color of items inside the toggle button
     }
   }
 }
 
 .sidebar-hidden .sidebar {
-  transform: translateX(-240px);
+  transform: translateX(-240px);  // Move sidebar off-screen when hidden
 }
 
 .sidebar h4 {
-  font-size: 1.25rem;
+  font-size: 1.25rem;  // Font size for sidebar headers
 
   a {
     display: block;
 
     &:hover {
-      text-decoration: none;
+      text-decoration: none;  // Remove underline from links on hover
     }
   }
 }
 
-// Content styles
-body {
-  .content {
-    margin-left: 240px;
-    padding: 1rem;
-    transition: margin 0.3s ease;
-
-    h2,
-    h3 {
-      margin-top: 6px;
-      margin-bottom: 6px;
-      font-size: 1.75rem;
-    }
-  }
-}
-
+// Content styles when sidebar is hidden
 body.sidebar-hidden .content {
-  margin-left: 0px;
+  margin-left: 0px;  // Remove margin when sidebar is hidden
 }
 
-// Media Queries
+// Media Queries for responsive design
 @media screen and (max-width: 992px) {
   .sidebar {
-    transform: translateX(-240px);
+    transform: translateX(-240px);  // Hide sidebar on smaller screens
   }
 
   body .content {
-    margin-left: 0px;
+    margin-left: 0px;  // Remove sidebar space
   }
 
   .sidebar-show .sidebar {
-    transform: translateX(0px);
+    transform: translateX(0px);  // Show sidebar when toggled
     position: fixed;
-    z-index: 1000;
+    z-index: 1000;  // Ensure sidebar stays above other content
 
     .toggle-sidebar {
-      display: inline;
+      display: inline;  // Show the toggle button
     }
   }
 
   body.sidebar-show .content {
-    margin-left: 0px;
+    margin-left: 0px;  // Remove content margin when sidebar is shown
   }
 }
 
 @media screen and (max-width: 240px) {
   .sidebar-show .sidebar {
-    width: 100vw;
+    width: 100vw;  // Full width for sidebar on very small screens
   }
 }
 
-// Light and Dark mode styles
+// Light and Dark Mode styles
 .light-mode {
-  background-color: $color-light;
-  color: $color-text-light;
+  background-color: $color-light;  // Light mode background color
+  color: $color-text-light;  // Light mode text color
 }
 
 .dark-mode {
-  background-color: $color-dark;
-  color: $color-text-dark;
+  background-color: $color-dark;  // Dark mode background color
+  color: $color-text-dark;  // Dark mode text color
 }
 
-// Navbar styles
+// Navbar styles with transition effect
 .navbar {
-  transition: background-color 0.5s;
-  padding: 0rem 0rem;
+  transition: background-color 0.5s;  // Smooth transition for navbar background color
+  padding: 0rem 0rem;  // Remove padding from navbar
 
   .nav-item[data-badge]:not([data-badge=""])::before {
-    content: attr(data-badge);
+    content: attr(data-badge);  // Display a badge if data-badge attribute is set
     position: absolute;
-    background-color: rgb(231, 0, 0);
+    background-color: rgb(231, 0, 0);  // Red background for badge
     color: white;
     font-size: 10px;
     border-radius: 3px;
@@ -171,39 +175,35 @@ body.sidebar-hidden .content {
 }
 
 .language-flag {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
+  width: 20px;  // Width of language flag
+  height: 20px;  // Height of language flag
+  margin-right: 5px;  // Margin between flag and text
 }
 
-
-
-
-
-// Additional navbar and dropdown styles
+// Dark mode adjustments for navbar
 .dark-mode .navbar-nav .nav-link .fas,
 .dark-mode .navbar-nav .btn .fas,
 .dark-mode .navbar-nav .nav-link {
-  color: $color-text-dark;
+  color: $color-text-dark;  // Dark mode icon color in navbar
 }
 
 .dark-mode .navbar-nav .nav-link:focus,
 .dark-mode .navbar-nav .nav-link:hover {
-  color: $color-text-dark;
+  color: $color-text-dark;  // Dark mode hover/focus color for navbar links
 }
 
 // Table Styles
 .two-side-responsive-table {
-  width: 100%;
-  border-collapse: collapse;
+  width: 100%;  // Full width for tables
+  border-collapse: collapse;  // Collapse table borders
 
-  >tbody {
-    >tr {
-      >td {
-        padding: 5px 0;
+  > tbody {
+    > tr {
+      > td {
+        padding: 5px 0;  // Padding for table cells
 
         &:nth-child(1) {
-          width: 240px;
+          width: 240px;  // Fixed width for the first column
         }
       }
     }
@@ -212,76 +212,74 @@ body.sidebar-hidden .content {
 
 @media (max-width: 600px) {
   .two-side-responsive-table {
-    width: 100%;
+    width: 100%;  // Full width for tables on smaller screens
     display: table;
 
-    >tbody {
-      >tr {
+    > tbody {
+      > tr {
         display: block;
-        width: 100%;
+        width: 100%;  // Block display for table rows
 
-        >td {
+        > td {
           display: block;
-          width: 100%;
+          width: 100%;  // Full width for table cells
           box-sizing: border-box;
         }
 
-        >td:nth-child(1) {
-          width: 100%;
+        > td:nth-child(1) {
+          width: 100%;  // First column takes full width
         }
       }
-
     }
   }
 }
 
-// Pagination
+// Pagination styles
 .pagination {
-  display: block !important;
+  display: block !important;  // Block display for pagination
 }
 
 .pagination-top {
-  padding: 5px 0 10px 0;
+  padding: 5px 0 10px 0;  // Padding for the top pagination
 }
 
 .pagination-bottom {
-  padding: 10px 0 5px 0;
+  padding: 10px 0 5px 0;  // Padding for the bottom pagination
 }
 
 .pagination-number {
-  text-align: center;
+  text-align: center;  // Center align pagination numbers
 }
 
+// Pagination link styles
 .page-selector a {
   position: relative;
   display: inline-block;
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #4e73df;
-  background-color: #fff;
-  border: 1px solid #dddfeb;
-  border-top-color: rgb(221, 223, 235);
-  border-right-color: rgb(221, 223, 235);
-  border-bottom-color: rgb(221, 223, 235);
-  border-left-color: rgb(221, 223, 235);
+  color: #4e73df;  // Link color
+  background-color: #fff;  // Background color
+  border: 1px solid #dddfeb;  // Border color
 }
 
-.dark-mode{
+// Dark mode styles for pagination
+.dark-mode {
   .page-selector a {
     line-height: 1.25;
-    color: #4e73df;
+    color: #4e73df;  // Dark mode pagination link color
   }
 }
 
-.pagination-number>.page-selector:first-child a {
+// First and last page styles
+.pagination-number > .page-selector:first-child a {
   border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 5px;  // Rounded left corners for first page
 }
 
-.pagination-number>.page-selector:last-child a {
+.pagination-number > .page-selector:last-child a {
   border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 5px;  // Rounded right corners for last page
 }
 
 .page-selector a:hover {
@@ -295,7 +293,6 @@ body.sidebar-hidden .content {
 }
 
 
-
 @media screen and (max-width: 600px) {
 
   .page-selector-end,
@@ -303,12 +300,12 @@ body.sidebar-hidden .content {
     display: none;
   }
 
-  .pagination-number>.page-first a {
+  .pagination-number > .page-first a {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
   }
 
-  .pagination-number>.page-last a {
+  .pagination-number > .page-last a {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
@@ -319,7 +316,6 @@ body.sidebar-hidden .content {
 }
 
 // Sort Table
-
 .data-wrapper {
   overflow-x: auto;
   margin-bottom: 10px;
@@ -383,22 +379,13 @@ td[data-order-method="desc"] {
   height: 6px;
 }
 
-*,
-::before,
-::after {
-  box-sizing: border-box;
 
-}
 
 // Multi Select Styles
 
 select[multiple].form-control {
   height: 38px;
 }
-
-
-
-
 
 .multi-select {
   display: flex;
@@ -420,7 +407,7 @@ select[multiple].form-control {
     gap: 7px;
     min-height: calc(1.5em + .75rem + 2px);
 
-    &>span {
+    & > span {
       white-space: nowrap;
       overflow-x: hidden;
       text-overflow: ellipsis;
@@ -473,9 +460,6 @@ select[multiple].form-control {
     }
   }
 
-
-
-
   .multi-select-options {
     display: none;
     box-sizing: border-box;
@@ -488,7 +472,7 @@ select[multiple].form-control {
     margin-top: 0px;
     padding: 2px 1px;
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: .25rem;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.26);
     overflow-y: auto;
     overflow-x: hidden;
@@ -512,7 +496,8 @@ select[multiple].form-control {
     .multi-select-option,
     .multi-select-all {
       padding: 6px 12px 4px 12px;
-      height: 32px;
+      height: 30px;
+      display: flex;
     }
 
     .multi-select-option .multi-select-option-radio,
@@ -521,7 +506,7 @@ select[multiple].form-control {
       height: 16px;
       width: 16px;
       border: 1px solid $color-input-dark;
-      border-radius: 4px;
+      border-radius: 3px;
       display: inline-block;
     }
 
@@ -580,8 +565,8 @@ select[multiple].form-control {
     .multi-select-search {
       padding: 5px 10px;
       border: 1px solid $color-border-light;
-      border-radius: 5px;
-      margin: 10px 10px 5px 10px;
+      border-radius: .25rem;
+      margin: 10px 10px 8px 10px;
       width: calc(100% - 20px);
       box-sizing: border-box;
       outline: none;
@@ -592,8 +577,6 @@ select[multiple].form-control {
       }
     }
   }
-
-
 
   .multi-select-header,
   .multi-select-option,
@@ -606,12 +589,12 @@ select[multiple].form-control {
   }
 
   .multi-select-option-container {
-    padding: 5px 0px;
+    padding: 0px 0px;
     border-bottom: 1px solid #eee;
   }
 
   .multi-select-optgroup {
-    padding: 5px 0;
+    padding: 0px 0;
   }
 
   .multi-select-optgroup-label {
@@ -632,9 +615,7 @@ select[multiple].form-control {
   }
 }
 
-a {
-  color: #2964a4;
-}
+
 
 .table.table-row thead a {
   color: #1e2022;
@@ -658,7 +639,6 @@ a {
       border-top: 1px solid #595a5c;
     }
   }
-
 
   .multi-select,
   .form-control {
