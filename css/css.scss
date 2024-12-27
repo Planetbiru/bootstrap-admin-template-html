@@ -235,8 +235,6 @@ body.sidebar-hidden .content {
   }
 }
 
-
-
 // Pagination
 .pagination {
   display: block !important;
@@ -320,9 +318,6 @@ body.sidebar-hidden .content {
   padding: 10px 0;
 }
 
-
-
-
 // Sort Table
 
 .data-wrapper {
@@ -353,7 +348,6 @@ thead .data-sort-header {
 }
 
 .table-row thead td {
-
   a {
     padding-right: 6px;
   }
@@ -517,7 +511,7 @@ select[multiple].form-control {
 
     .multi-select-option,
     .multi-select-all {
-      padding: 6px 12px;
+      padding: 6px 12px 4px 12px;
       height: 32px;
     }
 
