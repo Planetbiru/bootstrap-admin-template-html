@@ -264,12 +264,11 @@ body.sidebar-hidden .content {
 }
 
 // Dark mode styles for pagination
-.dark-mode {
-  .page-selector a {
-    line-height: 1.25;
-    color: #4e73df;  // Dark mode pagination link color
-  }
+.dark-mode .page-selector a {
+  line-height: 1.25;
+  color: #4e73df;  // Dark mode pagination link color
 }
+
 
 // First and last page styles
 .pagination-number > .page-selector:first-child a {

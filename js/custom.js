@@ -267,6 +267,6 @@ jQuery(function ($) {
   initDatetimePicker();
   initMultipleSelect();
   initSortTable();
-  initSortData(window.location.search);
+  initSortData();
   initOrderUrl(window.location.search);
 });

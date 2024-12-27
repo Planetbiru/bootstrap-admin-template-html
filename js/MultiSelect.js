@@ -31,28 +31,28 @@ class MultiSelect {
         this.name = name.split('[]').join('');
         if (!this.options.data.length) {
             let options = this.selectElement.querySelectorAll('option');
-            for (let i = 0; i < options.length; i++) {
-                const parentOptgroup = options[i].closest('optgroup');
+            for (const option of options) {
+                const parentOptgroup = option.closest('optgroup');
                 if (parentOptgroup) {
                     const groupLabel = parentOptgroup.label;
                     if (!this.options.data.some(item => item.groupLabel === groupLabel)) {
                         this.options.data.push({ groupLabel: groupLabel, options: [] });
                     }
                     this.options.data.find(item => item.groupLabel === groupLabel).options.push({
-                        value: options[i].value,
-                        text: options[i].innerHTML,
-                        selected: options[i].selected,
-                        html: options[i].getAttribute('data-html')
+                        value: option.value,
+                        text: option.innerHTML,
+                        selected: option.selected,
+                        html: option.getAttribute('data-html')
                     });
                 } else {
                     this.options.data.push({
-                        value: options[i].value,
-                        text: options[i].innerHTML,
-                        selected: options[i].selected,
-                        html: options[i].getAttribute('data-html')
+                        value: option.value,
+                        text: option.innerHTML,
+                        selected: option.selected,
+                        html: option.getAttribute('data-html')
                     });
                 }
-            }
+            }            
         }
         this.element = this._template();
         this.selectElement.replaceWith(this.element);
@@ -65,23 +65,23 @@ class MultiSelect {
         let nonSelectAllOptionsHTML = '';  // HTML for non-optgroup options
         let selectAllHTML = ''; // HTML for Select All
 
-        let underOptgroupHTML = '';
 
         // Loop to process data
-        for (let i = 0; i < this.data.length; i++) {
-            if (this.data[i].groupLabel) {
+        let underOptgroupHTML = ''; // Initialize variable for optgroup options
+        for (const group of this.data) {
+            if (group.groupLabel) {
                 // This is an optgroup
                 optionsHTML += `<div class="multi-select-optgroup">
-                    <span class="multi-select-optgroup-label">${this.data[i].groupLabel}</span>
+                    <span class="multi-select-optgroup-label">${group.groupLabel}</span>
                     <div class="multi-select-optgroup-options">`;
 
                 // Loop through each option in the optgroup
-                for (let j = 0; j < this.data[i].options.length; j++) {
+                for (const option of group.options) {
                     underOptgroupHTML += `
                         <div class="multi-select-option-container">
-                            <div class="multi-select-option${this.selectedValues.includes(this.data[i].options[j].value) ? ' multi-select-selected' : ''}" data-value="${this.data[i].options[j].value}">
+                            <div class="multi-select-option${this.selectedValues.includes(option.value) ? ' multi-select-selected' : ''}" data-value="${option.value}">
                                 <span class="multi-select-option-radio"></span>
-                                <span class="multi-select-option-text">${this.data[i].options[j].html ? this.data[i].options[j].html : this.data[i].options[j].text}</span>
+                                <span class="multi-select-option-text">${option.html ? option.html : option.text}</span>
                             </div>
                         </div>
                     `;
@@ -92,14 +92,15 @@ class MultiSelect {
                 // Options outside the optgroup
                 nonSelectAllOptionsHTML += `
                     <div class="multi-select-option-container">
-                        <div class="multi-select-option${this.selectedValues.includes(this.data[i].value) ? ' multi-select-selected' : ''}" data-value="${this.data[i].value}">
+                        <div class="multi-select-option${this.selectedValues.includes(group.value) ? ' multi-select-selected' : ''}" data-value="${group.value}">
                             <span class="multi-select-option-radio"></span>
-                            <span class="multi-select-option-text">${this.data[i].html ? this.data[i].html : this.data[i].text}</span>
+                            <span class="multi-select-option-text">${group.html ? group.html : group.text}</span>
                         </div>
                     </div>
                 `;
             }
         }
+
 
         // If 'Select All' is enabled, add HTML for Select All
         if (this.options.selectAll === true || this.options.selectAll === 'true') {
@@ -113,7 +114,9 @@ class MultiSelect {
         // Combine all HTML into one template
         let template = `
             <div class="multi-select ${this.name}"${this.selectElement.id ? ' id="' + this.selectElement.id + '"' : ''} style="${this.width ? 'width:' + this.width + ';' : ''}${this.height ? 'height:' + this.height + ';' : ''}">
+                <div class="multi-select-hidden-input-area" style="display:none;">
                 ${this.selectedValues.map(value => `<input type="hidden" name="${this.name}[]" value="${value}">`).join('')}
+                </div>
                 <div class="multi-select-header" style="${this.width ? 'width:' + this.width + ';' : ''}${this.height ? 'height:' + this.height + ';' : ''}">
                     <span class="multi-select-header-max">${this.options.max ? this.selectedValues.length + '/' + this.options.max : ''}</span>
                     <span class="multi-select-header-placeholder">${this.placeholder}</span>
@@ -138,8 +141,10 @@ class MultiSelect {
     _eventHandlers() {
         let headerElement = this.element.querySelector('.multi-select-header');
         this.element.querySelectorAll('.multi-select-option').forEach(option => {
+            
             option.onclick = () => {
                 let selected = true;
+                
                 if (!option.classList.contains('multi-select-selected')) {
                     if (this.options.max && this.selectedValues.length >= this.options.max) {
                         return;
@@ -153,12 +158,12 @@ class MultiSelect {
                             headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option" data-value="${option.dataset.value}">${option.querySelector('.multi-select-option-text').innerHTML}</span>`);
                         }
                     }
-                    this.element.querySelector('.multi-select').insertAdjacentHTML('afterbegin', `<input type="hidden" name="${this.name}[]" value="${option.dataset.value}">`);
+                    this.element.querySelector('.multi-select .multi-select-hidden-input-area').insertAdjacentHTML('beforeend', `<input type="hidden" name="${this.name}[]" value="${option.dataset.value}">`);
                     try {
                         this.data.filter(data => data.value == option.dataset.value)[0].selected = true;
                     }
                     catch (e) {
-
+                        // Do nothing
                     }
                 } else {
                     option.classList.remove('multi-select-selected');
@@ -215,10 +220,22 @@ class MultiSelect {
             let selectAllButton = this.element.querySelector('.multi-select-all');
             selectAllButton.onclick = () => {
                 let allSelected = selectAllButton.classList.contains('multi-select-selected');
+
+                // remove all hidden input
+                selectAllButton.closest('.multi-select')
+                const hiddenInputs = selectAllButton.closest('.multi-select').querySelectorAll('input[type="hidden"]');
+                if(hiddenInputs != null)
+                {
+                    hiddenInputs.forEach(input => input.remove());
+                }
+                
                 this.element.querySelectorAll('.multi-select-option').forEach(option => {
                     let dataItem = this.data.find(data => data.value == option.dataset.value);
+                    if(!allSelected)
+                    {
+                        option.classList.remove('multi-select-selected');
+                    }
                     option.click();
-
                 });
                 selectAllButton.classList.toggle('multi-select-selected');
             };
