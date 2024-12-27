@@ -8,7 +8,7 @@ $color-selected: #2761a3;  // Color for selected items
 $color-input: #dee2e6;   // Input fields color
 $color-input-dark: #4f4f4f;  // Dark input field color
 $color-background-dark: #212529;  // Dark background color
-$color-background-light: #f3f4f7;  // Light background color
+$color-background-light: #f1f2f5;;  // Light background color
 $color-border-light: #dee2e6;  // Light border color
 $color-border-dark: #212529;  // Dark border color
 $color-text-light: #212529;  // Light text color
@@ -417,11 +417,11 @@ select[multiple].form-control {
       display: block;
       position: absolute;
       top: 50%;
-      right: 15px;
+      right: 7px;
       transform: translateY(-50%);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23949ba3' viewBox='0 0 16 16'%3E%3Cpath d='M8 13.1l-8-8 2.1-2.2 5.9 5.9 5.9-5.9 2.1 2.2z'/%3E%3C/svg%3E");
-      height: 12px;
-      width: 12px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M8 13.1l-8-8 2.1-2.2 5.9 5.9 5.9-5.9 2.1 2.2z'/%3E%3C/svg%3E");
+      height: 9px;
+      width: 9px;
     }
 
     &.multi-select-header-active {

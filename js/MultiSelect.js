@@ -274,7 +274,7 @@ class MultiSelect {
                         return;
                     }
                     option.classList.add('multi-select-selected');
-                    if (this.options.listAll === true || this.options.listAll === 'true') {
+                    if (this._isListAll()) {
                         if (this.element.querySelector('.multi-select-header-option')) {
                             let opt = Array.from(this.element.querySelectorAll('.multi-select-header-option')).pop();
                             opt.insertAdjacentHTML('afterend', `<span class="multi-select-header-option" data-value="${option.dataset.value}">${option.querySelector('.multi-select-option-text').innerHTML}</span>`);
@@ -292,11 +292,9 @@ class MultiSelect {
                 } else {
                     option.classList.remove('multi-select-selected');
                     this.element.querySelectorAll('.multi-select-header-option').forEach(headerOption => headerOption.dataset.value == option.dataset.value ? headerOption.remove() : '');
-                    let elem = this.element.querySelector(`input[value="${option.dataset.value}"]`);
-                    if(elem != null)
-                    {
-                        elem.parentNode.removeChild(elem);
-                    }
+
+                    this._removeHiddenInput(option);
+                    
                     try {
                         this.data.filter(data => data.value == option.dataset.value)[0].selected = false;
                     }
@@ -356,6 +354,40 @@ class MultiSelect {
                 headerElement.classList.remove('multi-select-header-active');
             }
         });
+    }
+
+    /**
+     * Removes the hidden input element associated with the given option.
+     * 
+     * This method looks for an `input` element with a `value` attribute matching the 
+     * `data-value` of the provided `option`. If such an input element exists, it is 
+     * removed from the DOM. This is typically used to clean up the hidden inputs 
+     * representing selected values in a multi-select component.
+     * 
+     * @param {HTMLElement} option - The option element whose associated hidden input should be removed.
+     * @returns {void} This method does not return any value.
+     */
+    _removeHiddenInput(option)
+    {
+        let elem = this.element.querySelector(`input[value="${option.dataset.value}"]`);
+        if(elem != null)
+        {
+            elem.parentNode.removeChild(elem);
+        }
+    }
+
+    /**
+     * Checks if the 'listAll' option is enabled.
+     * 
+     * This method checks if the `listAll` option in the configuration is set to `true` or 
+     * the string `'true'`. It is used to determine whether all options should be displayed
+     * in the multi-select dropdown, even if they are not selected.
+     * 
+     * @returns {boolean} `true` if the `listAll` option is enabled, `false` otherwise.
+     */
+    _isListAll()
+    {
+        return this.options.listAll === true || this.options.listAll === 'true';
     }
 
     /**
