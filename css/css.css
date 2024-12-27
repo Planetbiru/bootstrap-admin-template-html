@@ -295,9 +295,23 @@ td[data-order-method=desc] {
   content: "";
   position: absolute;
   display: inline-block;
-  background-color: #4e73df;
+  background-color: #1e2022;
   width: 1px;
   height: 6px;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M8 13.1l-8-8 2.1-2.2 5.9 5.9 5.9-5.9 2.1 2.2z'/%3E%3C/svg%3E");
+  background-position: right 10px top 50%;
+  background-repeat: no-repeat;
+  background-size: 9px;
+}
+
+select:focus {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M8 3.1l-8 8 2.1 2.2 5.9-5.9 5.9 5.9 2.1-2.2z'/%3E%3C/svg%3E");
 }
 
 select[multiple].form-control {
@@ -336,7 +350,7 @@ select[multiple].form-control {
   display: block;
   position: absolute;
   top: 50%;
-  right: 7px;
+  right: 10px;
   transform: translateY(-50%);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M8 13.1l-8-8 2.1-2.2 5.9 5.9 5.9-5.9 2.1 2.2z'/%3E%3C/svg%3E");
   height: 9px;
@@ -503,6 +517,9 @@ select[multiple].form-control {
 .table.table-row thead a:hover {
   text-decoration: none;
 }
+.table.table-row thead::before, .table.table-row thead::after {
+  background-color: #1e2022;
+}
 
 .dark-mode a {
   color: #d8dee4;
@@ -513,6 +530,20 @@ select[multiple].form-control {
 .dark-mode .table td,
 .dark-mode .table th {
   border-top: 1px solid #595a5c;
+}
+.dark-mode .table td::before, .dark-mode .table td::after,
+.dark-mode .table th::before,
+.dark-mode .table th::after {
+  background-color: #f8f9fa;
+}
+.dark-mode .table a {
+  color: #f8f9fa;
+}
+.dark-mode .table.table-row thead a {
+  color: #f8f9fa;
+}
+.dark-mode .table.table-row thead a:hover {
+  text-decoration: none;
 }
 .dark-mode .multi-select,
 .dark-mode .form-control {

@@ -8,7 +8,7 @@ $color-selected: #2761a3;  // Color for selected items
 $color-input: #dee2e6;   // Input fields color
 $color-input-dark: #4f4f4f;  // Dark input field color
 $color-background-dark: #212529;  // Dark background color
-$color-background-light: #f1f2f5;;  // Light background color
+$color-background-light: #f1f2f5;  // Light background color
 $color-border-light: #dee2e6;  // Light border color
 $color-border-dark: #212529;  // Dark border color
 $color-text-light: #212529;  // Light text color
@@ -373,12 +373,23 @@ td[data-order-method="desc"] {
   content: "";
   position: absolute;
   display: inline-block;
-  background-color: #4e73df;
+  background-color: #1e2022;
   width: 1px;
   height: 6px;
 }
 
-
+select {
+  appearance: none; 
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M8 13.1l-8-8 2.1-2.2 5.9 5.9 5.9-5.9 2.1 2.2z'/%3E%3C/svg%3E");
+  background-position: right 10px top 50%;
+  background-repeat: no-repeat;
+  background-size: 9px;
+}
+select:focus {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M8 3.1l-8 8 2.1 2.2 5.9-5.9 5.9 5.9 2.1-2.2z'/%3E%3C/svg%3E"); 
+}
 
 // Multi Select Styles
 
@@ -417,7 +428,7 @@ select[multiple].form-control {
       display: block;
       position: absolute;
       top: 50%;
-      right: 7px;
+      right: 10px;
       transform: translateY(-50%);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M8 13.1l-8-8 2.1-2.2 5.9 5.9 5.9-5.9 2.1 2.2z'/%3E%3C/svg%3E");
       height: 9px;
@@ -616,11 +627,16 @@ select[multiple].form-control {
 
 
 
-.table.table-row thead a {
-  color: #1e2022;
-
-  &:hover {
-    text-decoration: none;
+.table.table-row thead {
+  a {
+    color: #1e2022;
+  
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  &::before, &::after{
+    background-color: #1e2022;
   }
 }
 
@@ -636,6 +652,20 @@ select[multiple].form-control {
     td,
     th {
       border-top: 1px solid #595a5c;
+      &::before, &::after{
+        background-color: $color-text-dark;
+      }
+    }
+    a {
+      color: $color-text-dark;
+    }
+
+    &.table-row thead a {
+      color: $color-text-dark;
+    
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 
