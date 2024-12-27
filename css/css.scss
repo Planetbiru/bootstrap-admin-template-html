@@ -269,6 +269,13 @@ body.sidebar-hidden .content {
   border-left-color: rgb(221, 223, 235);
 }
 
+.dark-mode{
+  .page-selector a {
+    line-height: 1.25;
+    color: #4e73df;
+  }
+}
+
 .pagination-number>.page-selector:first-child a {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
