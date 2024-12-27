@@ -57,6 +57,7 @@ class MultiSelect {
         };
         this.options = Object.assign(defaults, options);
         this.selectElement = typeof element === 'string' ? document.querySelector(element) : element;
+        console.log(this.selectElement.dataset)
         for (const prop in this.selectElement.dataset) {
             if (this.options[prop] !== undefined) {
                 this.options[prop] = this.selectElement.dataset[prop];
