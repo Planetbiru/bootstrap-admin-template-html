@@ -165,7 +165,7 @@ class MultiSelect {
         let template = `
             <div class="multi-select ${this.name}"${this.selectElement.id ? ' id="' + this.selectElement.id + '"' : ''} style="${this._getDimension()}">
                 <div class="multi-select-hidden-input-area" style="display:none;">
-                ${this.selectedValues.map(value => `<input type="hidden" name="${this.name}[]" value="${value}">`).join('')}
+                ${this.selectedValues.map(value => `<input type="hidden" name="${this.name}[]" value="${value}">`).join('\r\n')}
                 </div>
                 <div class="multi-select-header" style="${this._getDimension()}">
                     <span class="multi-select-header-max">${this.options.max ? this.selectedValues.length + '/' + this.options.max : ''}</span>
@@ -236,8 +236,10 @@ class MultiSelect {
     _updateOption(headerElement, option, selected)
     {
         if (this.options.listAll === false || this.options.listAll === 'false') {
-            if (this.element.querySelector('.multi-select-header-option')) {
-                this.element.querySelector('.multi-select-header-option').remove();
+            let elem = this.element.querySelector('.multi-select-header-option');
+            if(elem != null)
+            {
+                elem.parentNode.removeChild(elem);
             }
             headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option">${this.selectedValues.length} ${this.options.labelSelected}</span>`);
         }
@@ -296,7 +298,7 @@ class MultiSelect {
                     }
                 } else {
                     option.classList.remove('multi-select-selected');
-                    this.element.querySelectorAll('.multi-select-header-option').forEach(headerOption => headerOption.dataset.value == option.dataset.value ? headerOption.remove() : '');
+                    this.element.querySelectorAll('.multi-select-header-option').forEach(headerOption => headerOption.dataset.value == option.dataset.value ? headerOption.parentNode.removeChild(headerOption) : '');
 
                     this._removeHiddenInput(option);
                     
@@ -333,7 +335,7 @@ class MultiSelect {
                 const hiddenInputs = selectAllButton.closest('.multi-select').querySelectorAll('input[type="hidden"]');
                 if(hiddenInputs != null)
                 {
-                    hiddenInputs.forEach(input => input.remove());
+                    hiddenInputs.forEach(input => input.parentNode.removeChild(input));
                 }
                 
                 this.element.querySelectorAll('.multi-select-option').forEach((option) => {
@@ -435,7 +437,7 @@ class MultiSelect {
 
         // Remove all placeholders (if there are multiple) before adding the new one
         this.element.querySelectorAll('.multi-select-header-placeholder').forEach(placeholder => {
-            placeholder.remove();
+            placeholder.parentNode.removeChild(placeholder);
         });
 
         // Add a new placeholder if there are no selected options
