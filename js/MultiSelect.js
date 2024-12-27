@@ -27,7 +27,7 @@ class MultiSelect {
                 this.options[prop] = this.selectElement.dataset[prop];
             }
         }
-        let name = this.selectElement.getAttribute('name') ? this.selectElement.getAttribute('name') : 'multi-select-' + Math.floor(Math.random() * 1000000);
+        let name = this._getName();
         this.name = name.split('[]').join('');
         if (!this.options.data.length) {
             let options = this.selectElement.querySelectorAll('option');
@@ -60,6 +60,11 @@ class MultiSelect {
         this._eventHandlers();
     }
 
+    _getName()
+    {
+        return this.selectElement.getAttribute('name') ? this.selectElement.getAttribute('name') : 'multi-select-' + Math.floor(Math.random() * 1000000);
+    }
+
     _template() {
         let optionsHTML = ''; // HTML for optgroup
         let nonSelectAllOptionsHTML = '';  // HTML for non-optgroup options
@@ -79,9 +84,9 @@ class MultiSelect {
                 for (const option of group.options) {
                     underOptgroupHTML += `
                         <div class="multi-select-option-container">
-                            <div class="multi-select-option${this.selectedValues.includes(option.value) ? ' multi-select-selected' : ''}" data-value="${option.value}">
+                            <div class="multi-select-option${this._getSelectedClass(option.value)}" data-value="${option.value}">
                                 <span class="multi-select-option-radio"></span>
-                                <span class="multi-select-option-text">${option.html ? option.html : option.text}</span>
+                                <span class="multi-select-option-text">${_getText(option)}</span>
                             </div>
                         </div>
                     `;
@@ -92,9 +97,9 @@ class MultiSelect {
                 // Options outside the optgroup
                 nonSelectAllOptionsHTML += `
                     <div class="multi-select-option-container">
-                        <div class="multi-select-option${this.selectedValues.includes(group.value) ? ' multi-select-selected' : ''}" data-value="${group.value}">
+                        <div class="multi-select-option${this._getSelectedClass(group.value)}" data-value="${group.value}">
                             <span class="multi-select-option-radio"></span>
-                            <span class="multi-select-option-text">${group.html ? group.html : group.text}</span>
+                            <span class="multi-select-option-text">${this._getText(group)}</span>
                         </div>
                     </div>
                 `;
@@ -110,14 +115,13 @@ class MultiSelect {
             </div>`;
         }
 
-
         // Combine all HTML into one template
         let template = `
-            <div class="multi-select ${this.name}"${this.selectElement.id ? ' id="' + this.selectElement.id + '"' : ''} style="${this.width ? 'width:' + this.width + ';' : ''}${this.height ? 'height:' + this.height + ';' : ''}">
+            <div class="multi-select ${this.name}"${this.selectElement.id ? ' id="' + this.selectElement.id + '"' : ''} style="${this._getDimension()}">
                 <div class="multi-select-hidden-input-area" style="display:none;">
                 ${this.selectedValues.map(value => `<input type="hidden" name="${this.name}[]" value="${value}">`).join('')}
                 </div>
-                <div class="multi-select-header" style="${this.width ? 'width:' + this.width + ';' : ''}${this.height ? 'height:' + this.height + ';' : ''}">
+                <div class="multi-select-header" style="${this._getDimension()}">
                     <span class="multi-select-header-max">${this.options.max ? this.selectedValues.length + '/' + this.options.max : ''}</span>
                     <span class="multi-select-header-placeholder">${this.placeholder}</span>
                 </div>
@@ -135,6 +139,50 @@ class MultiSelect {
         let element = document.createElement('div');
         element.innerHTML = template;
         return element;
+    }
+
+    _getText(option)
+    {
+        return `${option.html ? option.html : option.text}`;
+    }
+
+    _getSelectedClass(value)
+    {
+        return `${this.selectedValues.includes(value) ? ' multi-select-selected' : ''}`;
+    }
+
+    _getDimension()
+    {
+        return `${this.width ? 'width:' + this.width + ';' : ''}${this.height ? 'height:' + this.height + ';' : ''}`;
+    }
+
+    _updateOption(selected)
+    {
+        if (this.options.listAll === false || this.options.listAll === 'false') {
+            if (this.element.querySelector('.multi-select-header-option')) {
+                this.element.querySelector('.multi-select-header-option').remove();
+            }
+            headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option">${this.selectedValues.length} ${this.options.labelSelected}</span>`);
+        }
+        if (!this.element.querySelector('.multi-select-header-placeholder')) {
+            headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-placeholder">${this.placeholder}</span>`);
+        }
+        if (this.options.max) {
+            this.element.querySelector('.multi-select-header-max').innerHTML = this.selectedValues.length + '/' + this.options.max;
+        }
+        if (this.options.search === true || this.options.search === 'true') {
+            this.element.querySelector('.multi-select-search').value = '';
+        }
+        this.element.querySelectorAll('.multi-select-option').forEach(option => option.style.display = 'flex');
+        if (this.options.closeListOnItemSelect === true || this.options.closeListOnItemSelect === 'true') {
+            headerElement.classList.remove('multi-select-header-active');
+        }
+        this.options.onChange(option.dataset.value, option.querySelector('.multi-select-option-text').innerHTML, option);
+        if (selected) {
+            this.options.onSelect(option.dataset.value, option.querySelector('.multi-select-option-text').innerHTML, option);
+        } else {
+            this.options.onUnselect(option.dataset.value, option.querySelector('.multi-select-option-text').innerHTML, option);
+        }
     }
 
 
@@ -177,31 +225,7 @@ class MultiSelect {
                     }
                     selected = false;
                 }
-                if (this.options.listAll === false || this.options.listAll === 'false') {
-                    if (this.element.querySelector('.multi-select-header-option')) {
-                        this.element.querySelector('.multi-select-header-option').remove();
-                    }
-                    headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option">${this.selectedValues.length} selected</span>`);
-                }
-                if (!this.element.querySelector('.multi-select-header-placeholder')) {
-                    headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-placeholder">${this.placeholder}</span>`);
-                }
-                if (this.options.max) {
-                    this.element.querySelector('.multi-select-header-max').innerHTML = this.selectedValues.length + '/' + this.options.max;
-                }
-                if (this.options.search === true || this.options.search === 'true') {
-                    this.element.querySelector('.multi-select-search').value = '';
-                }
-                this.element.querySelectorAll('.multi-select-option').forEach(option => option.style.display = 'flex');
-                if (this.options.closeListOnItemSelect === true || this.options.closeListOnItemSelect === 'true') {
-                    headerElement.classList.remove('multi-select-header-active');
-                }
-                this.options.onChange(option.dataset.value, option.querySelector('.multi-select-option-text').innerHTML, option);
-                if (selected) {
-                    this.options.onSelect(option.dataset.value, option.querySelector('.multi-select-option-text').innerHTML, option);
-                } else {
-                    this.options.onUnselect(option.dataset.value, option.querySelector('.multi-select-option-text').innerHTML, option);
-                }
+                this._updateOption(selected);
             };
         });
 
@@ -230,7 +254,7 @@ class MultiSelect {
                 }
                 
                 this.element.querySelectorAll('.multi-select-option').forEach(option => {
-                    let dataItem = this.data.find(data => data.value == option.dataset.value);
+                    this.data.find(data => data.value == option.dataset.value);
                     if(!allSelected)
                     {
                         option.classList.remove('multi-select-selected');
@@ -266,12 +290,11 @@ class MultiSelect {
                     this.element.querySelector('.multi-select-header').insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option" data-value="${option.dataset.value}">${option.querySelector('.multi-select-option-text').innerHTML}</span>`);
                 }
             });
-        } else {
+        } else if (this.selectedValues.length > 0) {
             // If not showing all options, just show how many options are selected
-            if (this.selectedValues.length > 0) {
-                // Add the number of selected options to the header
-                this.element.querySelector('.multi-select-header').insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option">${this.selectedValues.length} selected</span>`);
-            }
+            // Add the number of selected options to the header
+            this.element.querySelector('.multi-select-header').insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option">${this.selectedValues.length} ${this.options.labelSelected}</span>`);
+        
         }
 
         // Remove all placeholders (if there are multiple) before adding the new one
