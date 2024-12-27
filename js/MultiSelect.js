@@ -242,7 +242,7 @@ class MultiSelect {
             headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option">${this.selectedValues.length} ${this.options.labelSelected}</span>`);
         }
         if (!this.element.querySelector('.multi-select-header-placeholder')) {
-            headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-placeholder">${this.placeholder}</span>`);
+            headerElement.insertAdjacentHTML('beforeend', `<span class="multi-select-header-placeholder">${this.placeholder}</span>`);
         }
         if (this.options.max) {
             this.element.querySelector('.multi-select-header-max').innerHTML = this.selectedValues.length + '/' + this.options.max;
