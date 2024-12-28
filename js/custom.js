@@ -95,12 +95,10 @@ function initDatetimePicker() {
  * - Modifies the URL with updated sorting parameters.
  */
 function initSortTable() {
-  // Select all tables with the class 'table-sort-by-column'
-  document.querySelectorAll("table.table-sort-by-column").forEach(function (thisTable) {
-    // Get the 'data-self-name' attribute of the table
+  const tables = document.querySelectorAll("table.table-sort-by-column");
+  
+  tables.forEach(function (thisTable) {
     let self = thisTable.getAttribute("data-self-name");
-    
-    // Get the current URL and process it
     let originalURL = document.location.toString();
     let arr0 = originalURL.split("#");
     originalURL = arr0[0];
@@ -110,23 +108,21 @@ function initSortTable() {
     let argArray = args.split("&");
     let queryObject = {};
 
-    // Parse the query parameters into an object
-    argArray.forEach(function (param) {
+    argArray.forEach(function(param) {
       let arr2 = param.split("=");
       if (arr2[0] !== "") {
         queryObject[arr2[0]] = arr2[1];
       }
     });
 
-    // Get the current order method and last column
     let currentOrderMethod = queryObject.ordertype || "";
     let lastColumn = queryObject.orderby || "";
 
-    // Find all 'td' elements with the class 'order-controll' in the table
-    thisTable.querySelectorAll("td.order-controll").forEach(function (thisCel) {
+    const cells = thisTable.querySelectorAll("td.order-controll");
+
+    cells.forEach(function (thisCel) {
       let columnName = thisCel.getAttribute("data-col-name");
 
-      // If this column is the last sorted column, toggle the sorting order
       if (lastColumn === columnName) {
         if (currentOrderMethod === "asc") {
           queryObject.ordertype = "desc";
@@ -138,20 +134,20 @@ function initSortTable() {
       } else {
         queryObject.ordertype = "asc";
       }
+
       queryObject.orderby = columnName;
 
-      // Rebuild the query string
       let arr3 = [];
       for (let key in queryObject) {
         if (queryObject.hasOwnProperty(key)) {
           arr3.push(key + "=" + queryObject[key]);
         }
       }
+
       let args3 = arr3.join("&");
       let finalURL = originalURL + "?" + args3;
-
-      // Update the 'href' attribute of the link inside the cell
-      let link = thisCel.querySelector(" > a");
+      let link = thisCel.querySelector("a");
+      
       if (link) {
         link.setAttribute("href", finalURL);
       }
