@@ -593,10 +593,10 @@ select[multiple].form-control {
   border-radius: 0;
 }
 .dark-mode .multi-select .multi-select-all:hover, .dark-mode .multi-select .multi-select-all:active {
-  background-color: #5c5c5c;
+  background-color: #52525e;
 }
 .dark-mode .multi-select .multi-select-option:hover, .dark-mode .multi-select .multi-select-option:active {
-  background-color: #5c5c5c;
+  background-color: #52525e;
 }
 .dark-mode .multi-select .multi-select-option-container {
   padding: 5px 0px;

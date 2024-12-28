@@ -166,7 +166,7 @@ class MultiSelect {
         let template = `
             <div class="multi-select ${this.name}"${this.selectElement.id ? ' id="' + this.selectElement.id + '"' : ''} style="${this._getDimension()}">
                 <div class="multi-select-hidden-input-area" style="display:none;">
-                ${this.selectedValues.map(value => `<input type="hidden" name="${this.name}[]" value="${value}">`).join('\r\n')}
+                    ${this.selectedValues.map(value => `<input type="hidden" name="${this.name}[]" value="${value}">`).join('\r\n')}
                 </div>
                 <div class="multi-select-header" style="${this._getDimension()}">
                     <span class="multi-select-header-max">${this.options.max ? this.selectedValues.length + '/' + this.options.max : ''}</span>
