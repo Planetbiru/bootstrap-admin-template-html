@@ -231,6 +231,50 @@
             </table>
         </form>
 
+
+
+        <div class="filter-section">
+			<form action="" method="get" class="filter-form">
+				<span class="filter-group">
+					<span class="filter-label">Nama</span>
+					<span class="filter-control">
+						<input type="text" name="nama" class="form-control" value="" autocomplete="off">
+					</span>
+				</span>
+
+                <span class="filter-group">
+					<span class="filter-label">KTSK</span>
+					<span class="filter-control">
+							<select name="ktsk_id" class="form-control">
+								<option value="">Pilih satu</option>
+								<option value="3">ABDI HAMDANI</option>
+                                <option value="5">RIZKI NANDA</option>
+                                <option value="4">ROY PUTRA SILALAHI</option>
+                                <option value="10">SIGIT HERWANTO</option>
+                                <option value="11">SWEMPRI AGUNG PRASETYO</option>
+                                <option value="8">YULIANDI HIDAYAT DALIMUNTHE</option>
+                                <option value="12">YUNIAR LUBIS</option>							
+                            </select>
+					</span>
+				</span>
+				
+				<span class="filter-group">
+					<button type="submit" class="btn btn-success">Cari</button>
+				</span>
+						
+				<span class="filter-group">
+					<button type="submit" name="user_action" value="export" class="btn btn-success">Ekspor</button>
+				</span>
+								<span class="filter-group">
+					<button type="submit" name="filter" value="update" class="btn btn-success"><span class="fa fa-edit"></span></button>
+				</span>
+						
+				<span class="filter-group">
+					<button type="button" class="btn btn-primary" onclick="window.location='/lokasi-proyek.php?user_action=create'">Tambah</button>
+				</span>
+							<input type="hidden" name="orderby"><input type="hidden" name="ordertype"></form>
+		</div>
+
         <div class="data-section" data-ajax-support="true" data-ajax-name="main-data">
             <div class="pagination pagination-top">
                 <div class="pagination-number">

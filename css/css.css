@@ -7,13 +7,16 @@ body .content {
   padding: 1rem;
   transition: margin 0.3s ease;
 }
-body .content h2, body .content h3 {
+body .content h2,
+body .content h3 {
   margin-top: 6px;
   margin-bottom: 6px;
   font-size: 1.75rem;
 }
 
-*, ::before, ::after {
+*,
+::before,
+::after {
   box-sizing: border-box;
 }
 
@@ -180,6 +183,24 @@ body.sidebar-hidden .content {
     width: 100%;
   }
 }
+.filter-section {
+  padding: 4px 0;
+  line-height: 44px;
+}
+.filter-section .filter-group {
+  white-space: nowrap;
+}
+.filter-section .form-control {
+  display: inline-block;
+  width: auto;
+  min-width: 100px;
+}
+.filter-section button,
+.filter-section [type=button],
+.filter-section [type=submit] {
+  margin-top: -4px;
+}
+
 .pagination {
   display: block !important;
 }
@@ -532,6 +553,12 @@ select[multiple].form-control {
 
 .dark-mode a {
   color: #d8dee4;
+}
+.dark-mode .multi-select-options-container {
+  height: 140px;
+  overflow-y: auto;
+  border-top: 1px solid #66696d;
+  margin-top: 5px;
 }
 .dark-mode .table {
   color: #f8f9fa;

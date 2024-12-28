@@ -1,166 +1,171 @@
 // Color variables for different UI elements
-$color-light: #f8f9fa;  // Light background color
-$color-dark: #212529;   // Dark background color
-$color-gray: #343a40;   // Gray color for sidebar and borders
-$color-hover: #495057;  // Color on hover
-$color-link: #FAFAFA;   // Link color
-$color-selected: #2761a3;  // Color for selected items
-$color-input: #dee2e6;   // Input fields color
-$color-input-dark: #4f4f4f;  // Dark input field color
-$color-background-dark: #212529;  // Dark background color
-$color-background-light: #f1f2f5;  // Light background color
-$color-border-light: #dee2e6;  // Light border color
-$color-border-dark: #212529;  // Dark border color
-$color-text-light: #212529;  // Light text color
-$color-text-dark: #f8f9fa;  // Dark text color
-$color-gray-light: #6d6d6d;  // Light gray color
-$color-gray-dark: #52525e;   // Dark gray color
-$color-placeholder: #b2b5b9;  // Placeholder text color
-$color-option-hover: #f3f4f7;  // Hover color for options
-$color-option-selected: #ffffff;  // Selected option color
-$color-dark-border: #666666;  // Dark border color
-$color-border-dark-2: #444444;  // Secondary dark border color
-$color-dark-checkbox: #a7a7a7;  // Dark checkbox color
-$color-input-dark2: #e4e4e4;  // Darker input color
+$color-light: #f8f9fa; // Light background color
+$color-dark: #212529; // Dark background color
+$color-gray: #343a40; // Gray color for sidebar and borders
+$color-hover: #495057; // Color on hover
+$color-link: #FAFAFA; // Link color
+$color-selected: #2761a3; // Color for selected items
+$color-input: #dee2e6; // Input fields color
+$color-input-dark: #4f4f4f; // Dark input field color
+$color-background-dark: #212529; // Dark background color
+$color-background-light: #f1f2f5; // Light background color
+$color-border-light: #dee2e6; // Light border color
+$color-border-dark: #212529; // Dark border color
+$color-text-light: #212529; // Light text color
+$color-text-dark: #f8f9fa; // Dark text color
+$color-gray-light: #6d6d6d; // Light gray color
+$color-gray-dark: #52525e; // Dark gray color
+$color-placeholder: #b2b5b9; // Placeholder text color
+$color-option-hover: #f3f4f7; // Hover color for options
+$color-option-selected: #ffffff; // Selected option color
+$color-dark-border: #666666; // Dark border color
+$color-border-dark-2: #444444; // Secondary dark border color
+$color-dark-checkbox: #a7a7a7; // Dark checkbox color
+$color-input-dark2: #e4e4e4; // Darker input color
 
 // Body styles with transition effects
 body {
-  overflow-x: hidden;  // Hide horizontal overflow
-  transition: background-color 0.5s, color 0.5s;  // Smooth transition for color and background changes
+  overflow-x: hidden; // Hide horizontal overflow
+  transition: background-color 0.5s, color 0.5s; // Smooth transition for color and background changes
 
   .content {
-    margin-left: 240px;  // Sidebar space
-    padding: 1rem;  // Padding around the content
-    transition: margin 0.3s ease;  // Smooth transition when margin changes
+    margin-left: 240px; // Sidebar space
+    padding: 1rem; // Padding around the content
+    transition: margin 0.3s ease; // Smooth transition when margin changes
 
-    h2, h3 {
+    h2,
+    h3 {
       margin-top: 6px;
       margin-bottom: 6px;
-      font-size: 1.75rem;  // Font size for headings
+      font-size: 1.75rem; // Font size for headings
     }
   }
 }
 
-*, ::before, ::after {
+*,
+::before,
+::after {
   box-sizing: border-box;
 }
 
 // Link styles
 a {
-  color: #2964a4;  // Default link color
+  color: #2964a4; // Default link color
 }
 
 // Sidebar styles
 .sidebar {
-  height: 100vh;  // Full viewport height
-  width: 240px;  // Sidebar width
-  background: $color-gray;  // Sidebar background color
-  position: fixed;  // Fixed position on the screen
-  padding-top: 20px;  // Padding on top of the sidebar
-  transition: transform 0.3s ease;  // Smooth transition for sidebar movement
-  transform: translateX(0);  // Initially positioned at the left side of the screen
+  height: 100vh; // Full viewport height
+  width: 240px; // Sidebar width
+  background: $color-gray; // Sidebar background color
+  position: fixed; // Fixed position on the screen
+  padding-top: 20px; // Padding on top of the sidebar
+  transition: transform 0.3s ease; // Smooth transition for sidebar movement
+  transform: translateX(0); // Initially positioned at the left side of the screen
 
   a {
-    color: $color-link;  // Link color in sidebar
+    color: $color-link; // Link color in sidebar
   }
 
   .nav-link:hover {
-    background-color: $color-hover;  // Hover effect on navigation links
+    background-color: $color-hover; // Hover effect on navigation links
   }
 
   .button-transparent {
-    background-color: transparent;  // Transparent button background
+    background-color: transparent; // Transparent button background
     border: none;
     outline: none;
 
-    &:focus, &:focus-visible, &:active {
-      outline: none;  // Remove outline when focused or active
+    &:focus,
+    &:focus-visible,
+    &:active {
+      outline: none; // Remove outline when focused or active
     }
   }
 
   .toggle-sidebar {
     float: right;
     margin-right: 10px;
-    display: none;  // Sidebar toggle is hidden by default
+    display: none; // Sidebar toggle is hidden by default
 
     * {
-      color: $color-link;  // Color of items inside the toggle button
+      color: $color-link; // Color of items inside the toggle button
     }
   }
 }
 
 .sidebar-hidden .sidebar {
-  transform: translateX(-240px);  // Move sidebar off-screen when hidden
+  transform: translateX(-240px); // Move sidebar off-screen when hidden
 }
 
 .sidebar h4 {
-  font-size: 1.25rem;  // Font size for sidebar headers
+  font-size: 1.25rem; // Font size for sidebar headers
 
   a {
     display: block;
 
     &:hover {
-      text-decoration: none;  // Remove underline from links on hover
+      text-decoration: none; // Remove underline from links on hover
     }
   }
 }
 
 // Content styles when sidebar is hidden
 body.sidebar-hidden .content {
-  margin-left: 0px;  // Remove margin when sidebar is hidden
+  margin-left: 0px; // Remove margin when sidebar is hidden
 }
 
 // Media Queries for responsive design
 @media screen and (max-width: 992px) {
   .sidebar {
-    transform: translateX(-240px);  // Hide sidebar on smaller screens
+    transform: translateX(-240px); // Hide sidebar on smaller screens
   }
 
   body .content {
-    margin-left: 0px;  // Remove sidebar space
+    margin-left: 0px; // Remove sidebar space
   }
 
   .sidebar-show .sidebar {
-    transform: translateX(0px);  // Show sidebar when toggled
+    transform: translateX(0px); // Show sidebar when toggled
     position: fixed;
-    z-index: 1000;  // Ensure sidebar stays above other content
+    z-index: 1000; // Ensure sidebar stays above other content
 
     .toggle-sidebar {
-      display: inline;  // Show the toggle button
+      display: inline; // Show the toggle button
     }
   }
 
   body.sidebar-show .content {
-    margin-left: 0px;  // Remove content margin when sidebar is shown
+    margin-left: 0px; // Remove content margin when sidebar is shown
   }
 }
 
 @media screen and (max-width: 240px) {
   .sidebar-show .sidebar {
-    width: 100vw;  // Full width for sidebar on very small screens
+    width: 100vw; // Full width for sidebar on very small screens
   }
 }
 
 // Light and Dark Mode styles
 .light-mode {
-  background-color: $color-light;  // Light mode background color
-  color: $color-text-light;  // Light mode text color
+  background-color: $color-light; // Light mode background color
+  color: $color-text-light; // Light mode text color
 }
 
 .dark-mode {
-  background-color: $color-dark;  // Dark mode background color
-  color: $color-text-dark;  // Dark mode text color
+  background-color: $color-dark; // Dark mode background color
+  color: $color-text-dark; // Dark mode text color
 }
 
 // Navbar styles with transition effect
 .navbar {
-  transition: background-color 0.5s;  // Smooth transition for navbar background color
-  padding: 0rem 0rem;  // Remove padding from navbar
+  transition: background-color 0.5s; // Smooth transition for navbar background color
+  padding: 0rem 0rem; // Remove padding from navbar
 
   .nav-item[data-badge]:not([data-badge=""])::before {
-    content: attr(data-badge);  // Display a badge if data-badge attribute is set
+    content: attr(data-badge); // Display a badge if data-badge attribute is set
     position: absolute;
-    background-color: rgb(231, 0, 0);  // Red background for badge
+    background-color: rgb(231, 0, 0); // Red background for badge
     color: white;
     font-size: 10px;
     border-radius: 3px;
@@ -175,17 +180,18 @@ body.sidebar-hidden .content {
 }
 
 .language-flag {
-  width: 20px; 
-  height: 20px;  
-  margin-right: 5px;  
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
 
-.navbar-nav .dropdown-item{
-  display: flex;           
-  align-items: center;     
- .text-muted {
+.navbar-nav .dropdown-item {
+  display: flex;
+  align-items: center;
+
+  .text-muted {
     margin-left: auto;
-    padding-left: 6px;     
+    padding-left: 6px;
   }
 }
 
@@ -193,26 +199,26 @@ body.sidebar-hidden .content {
 .dark-mode .navbar-nav .nav-link .fas,
 .dark-mode .navbar-nav .btn .fas,
 .dark-mode .navbar-nav .nav-link {
-  color: $color-text-dark;  // Dark mode icon color in navbar
+  color: $color-text-dark; // Dark mode icon color in navbar
 }
 
 .dark-mode .navbar-nav .nav-link:focus,
 .dark-mode .navbar-nav .nav-link:hover {
-  color: $color-text-dark;  // Dark mode hover/focus color for navbar links
+  color: $color-text-dark; // Dark mode hover/focus color for navbar links
 }
 
 // Table Styles
 .two-side-responsive-table {
-  width: 100%;  // Full width for tables
-  border-collapse: collapse;  // Collapse table borders
+  width: 100%; // Full width for tables
+  border-collapse: collapse; // Collapse table borders
 
-  > tbody {
-    > tr {
-      > td {
-        padding: 5px 0;  // Padding for table cells
+  >tbody {
+    >tr {
+      >td {
+        padding: 5px 0; // Padding for table cells
 
         &:nth-child(1) {
-          width: 240px;  // Fixed width for the first column
+          width: 240px; // Fixed width for the first column
         }
       }
     }
@@ -221,43 +227,66 @@ body.sidebar-hidden .content {
 
 @media (max-width: 600px) {
   .two-side-responsive-table {
-    width: 100%;  // Full width for tables on smaller screens
+    width: 100%; // Full width for tables on smaller screens
     display: table;
 
-    > tbody {
-      > tr {
+    >tbody {
+      >tr {
         display: block;
-        width: 100%;  // Block display for table rows
+        width: 100%; // Block display for table rows
 
-        > td {
+        >td {
           display: block;
-          width: 100%;  // Full width for table cells
+          width: 100%; // Full width for table cells
           box-sizing: border-box;
         }
 
-        > td:nth-child(1) {
-          width: 100%;  // First column takes full width
+        >td:nth-child(1) {
+          width: 100%; // First column takes full width
         }
       }
     }
   }
 }
 
+// Filter
+.filter-section {
+  padding: 4px 0;
+  line-height: 44px;
+
+  .filter-group {
+    white-space: nowrap;
+  }
+
+  .form-control {
+    display: inline-block;
+    width: auto;
+    min-width: 100px;
+  }
+
+  button,
+  [type="button"],
+  [type="submit"] {
+    margin-top: -4px;
+  }
+}
+
+
 // Pagination styles
 .pagination {
-  display: block !important;  // Block display for pagination
+  display: block !important; // Block display for pagination
 }
 
 .pagination-top {
-  padding: 5px 0 10px 0;  // Padding for the top pagination
+  padding: 5px 0 10px 0; // Padding for the top pagination
 }
 
 .pagination-bottom {
-  padding: 10px 0 5px 0;  // Padding for the bottom pagination
+  padding: 10px 0 5px 0; // Padding for the bottom pagination
 }
 
 .pagination-number {
-  text-align: center;  // Center align pagination numbers
+  text-align: center; // Center align pagination numbers
 }
 
 // Pagination link styles
@@ -267,27 +296,26 @@ body.sidebar-hidden .content {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #4e73df;  // Link color
-  background-color: #fff;  // Background color
-  border: 1px solid #dddfeb;  // Border color
+  color: #4e73df; // Link color
+  background-color: #fff; // Background color
+  border: 1px solid #dddfeb; // Border color
 }
 
 // Dark mode styles for pagination
 .dark-mode .page-selector a {
   line-height: 1.25;
-  color: #4e73df;  // Dark mode pagination link color
+  color: #4e73df; // Dark mode pagination link color
 }
-
 
 // First and last page styles
-.pagination-number > .page-selector:first-child a {
+.pagination-number>.page-selector:first-child a {
   border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;  // Rounded left corners for first page
+  border-bottom-left-radius: 5px; // Rounded left corners for first page
 }
 
-.pagination-number > .page-selector:last-child a {
+.pagination-number>.page-selector:last-child a {
   border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;  // Rounded right corners for last page
+  border-bottom-right-radius: 5px; // Rounded right corners for last page
 }
 
 .page-selector a:hover {
@@ -308,12 +336,12 @@ body.sidebar-hidden .content {
     display: none;
   }
 
-  .pagination-number > .page-first a {
+  .pagination-number>.page-first a {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
   }
 
-  .pagination-number > .page-last a {
+  .pagination-number>.page-last a {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
@@ -388,16 +416,17 @@ td[data-order-method="desc"] {
 }
 
 select {
-  appearance: none; 
-  -webkit-appearance: none; 
-  -moz-appearance: none; 
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M8 13.1l-8-8 2.1-2.2 5.9 5.9 5.9-5.9 2.1 2.2z'/%3E%3C/svg%3E");
   background-position: right 10px top 50%;
   background-repeat: no-repeat;
   background-size: 9px;
 }
+
 select:focus {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M8 3.1l-8 8 2.1 2.2 5.9-5.9 5.9 5.9 2.1-2.2z'/%3E%3C/svg%3E"); 
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23555555' viewBox='0 0 16 16'%3E%3Cpath d='M8 3.1l-8 8 2.1 2.2 5.9-5.9 5.9 5.9 2.1-2.2z'/%3E%3C/svg%3E");
 }
 
 // Multi Select Styles
@@ -426,7 +455,7 @@ select[multiple].form-control {
     gap: 7px;
     min-height: calc(1.5em + .75rem + 2px);
 
-    & > span {
+    &>span {
       white-space: nowrap;
       overflow-x: hidden;
       text-overflow: ellipsis;
@@ -639,12 +668,14 @@ select[multiple].form-control {
 .table.table-row thead {
   a {
     color: #1e2022;
-  
+
     &:hover {
       text-decoration: none;
     }
   }
-  &::before, &::after{
+
+  &::before,
+  &::after {
     background-color: #1e2022;
   }
 }
@@ -655,23 +686,33 @@ select[multiple].form-control {
     color: #d8dee4;
   }
 
+  .multi-select-options-container {
+    height: 140px;
+    overflow-y: auto;
+    border-top: 1px solid #66696d;
+    margin-top: 5px;
+  }
+
   .table {
     color: $color-text-dark;
 
     td,
     th {
       border-top: 1px solid #595a5c;
-      &::before, &::after{
+
+      &::before,
+      &::after {
         background-color: $color-text-dark;
       }
     }
+
     a {
       color: $color-text-dark;
     }
 
     &.table-row thead a {
       color: $color-text-dark;
-    
+
       &:hover {
         text-decoration: none;
       }
@@ -699,6 +740,8 @@ select[multiple].form-control {
         background-color: $color-gray-light;
       }
     }
+
+
 
     .multi-select-options {
       background-color: $color-input-dark;
