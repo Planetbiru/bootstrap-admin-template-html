@@ -335,6 +335,10 @@ body.sidebar-hidden .content {
   margin-bottom: 0;
 }
 
+.table-sort-by-column thead td a {
+  display: block;
+}
+
 tbody.data-table-manual-sort .data-sort-body {
   width: 8px;
   background-color: #8b97bd;
@@ -350,40 +354,51 @@ thead .data-sort-header {
 .table-row td {
   white-space: nowrap;
   position: relative;
-  padding: 0.5rem 0.6rem;
+  padding: 0.5rem 0.4rem;
+}
+.table-row td.data-sort {
+  padding: 0.5rem 0.5rem;
+}
+.table-row td.data-controll {
+  text-align: center;
 }
 
+.table-row thead td {
+  padding: 0.5rem 1.2rem 0.5rem 0.4rem;
+}
 .table-row thead td a {
   padding-right: 6px;
+}
+.table-row thead td.data-sort {
+  padding: 0.5rem 0.5rem;
+}
+.table-row thead td.data-controll {
+  text-align: center;
 }
 
 td[data-order-method=asc],
 td[data-order-method=desc] {
-  padding: 0.5rem 1.2rem 0.5rem 0.6rem;
+  padding: 0.5rem 1.2rem 0.5rem 0.4rem;
 }
 
-[data-order-method=asc]::before {
-  right: 6px;
-  top: 16px;
-  transform: rotate(-45deg);
+[data-order-method=asc]::after, [data-order-method=desc]::after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 2px solid #777777;
+  border-width: 0px 0px 2px 2px;
+  right: 0;
+  top: 15px;
 }
 
 [data-order-method=asc]::after {
-  right: 10px;
-  top: 16px;
-  transform: rotate(45deg);
+  transform: rotate(135deg);
+  top: 19px;
 }
 
-[data-order-method=asc]::before,
-[data-order-method=asc]::after,
-[data-order-method=desc]::before,
 [data-order-method=desc]::after {
-  content: "";
-  position: absolute;
-  display: inline-block;
-  background-color: #1e2022;
-  width: 1px;
-  height: 6px;
+  transform: rotate(-45deg);
 }
 
 select {
@@ -623,10 +638,18 @@ select[multiple].form-control {
 .dark-mode .table th {
   border-top: 1px solid #595a5c;
 }
-.dark-mode .table td::before, .dark-mode .table td::after,
+.dark-mode .table td::before, 
+.dark-mode .table td::after,
 .dark-mode .table th::before,
 .dark-mode .table th::after {
   background-color: #f8f9fa;
+}
+
+.dark-mode .table.table-sort-by-column td::before, 
+.dark-mode .table.table-sort-by-column td::after,
+.dark-mode .table.table-sort-by-column th::before,
+.dark-mode .table.table-sort-by-column th::after {
+  background-color: transparent;
 }
 .dark-mode .table a {
   color: #f8f9fa;
