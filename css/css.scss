@@ -264,6 +264,15 @@ body.sidebar-hidden .content {
     min-width: 100px;
   }
 
+  .filter-control
+    {
+      select[multiple]{
+        vertical-align: top;
+        margin-top: 3px;
+        width: 240px;
+      }
+    }
+
   button,
   [type="button"],
   [type="submit"] {
@@ -280,7 +289,9 @@ body.sidebar-hidden .content {
 
     .form-control{
       max-width: 100%;
+      
     }
+    
 
     &.date-time, &.date-time input.form-control
     {
