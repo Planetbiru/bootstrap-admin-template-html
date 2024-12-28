@@ -185,6 +185,7 @@ class MultiSelect {
 
         let element = document.createElement('div');
         element.innerHTML = template;
+        element.classList.add('multi-select-container');
         return element;
     }
 

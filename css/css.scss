@@ -269,8 +269,70 @@ body.sidebar-hidden .content {
   [type="submit"] {
     margin-top: -4px;
   }
-}
 
+  .input-datetime-wrapper{
+    display: inline-block;
+    &::after{
+      position: absolute;
+      top: 0px;
+      right: 5px;
+    }
+
+    .form-control{
+      max-width: 100%;
+    }
+
+    &.date-time, &.date-time input.form-control
+    {
+      width: 192px;
+      max-width: 192px;
+    }
+
+    &.date, &.date input.form-control
+    {
+      width: 130px;
+      max-width: 130px;
+    }
+
+    &.time, &.time input.form-control
+    {
+      width: 105px;
+      max-width: 105px;
+    }
+  }
+
+  .multi-select-container{
+    display: inline-block;
+    margin-top: 3px;
+    vertical-align: top;
+    width: 240px;
+  }
+
+  .multi-select{
+    max-width: 240px;
+    .multi-select-header{
+      padding-top: 2px;
+      width: calc(100% - 26px);
+      .multi-select-header-placeholder{
+        line-height: 1;
+        overflow-x: hidden;
+      }
+      .multi-select-header-option {
+        padding: 6px 8px 0px 8px;
+        height: 28px;
+        margin-top: 2px;
+        line-height: 1.2;
+      }
+    }
+
+    .multi-select-options .multi-select-search{
+      line-height: 1.2;
+      padding: .375rem .75rem;
+      color: #495057;
+    }
+  }
+
+}
 
 // Pagination styles
 .pagination {
@@ -446,10 +508,11 @@ select[multiple].form-control {
   height: calc(1.5em + .75rem + 2px);
   background-color: #FFFFFF;
   border-radius: 3px;
+  border: 1px solid $color-border-light;
 
   .multi-select-header {
     border-radius: 3px;
-    border: 1px solid $color-border-light;
+    
     padding: 4px 30px 4px 4px;
     overflow: hidden;
     gap: 7px;
