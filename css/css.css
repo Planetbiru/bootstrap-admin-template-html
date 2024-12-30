@@ -711,4 +711,17 @@ select[multiple].form-control {
 .dark-mode .multi-select .multi-select-option-container {
   padding: 5px 0px;
   border-bottom: 1px solid #666666;
+}
+
+.dark-mode .dropdown-menu-right {
+  background-color: #535353;
+}
+.dark-mode .dropdown-menu-right .dropdown-item {
+  color: #F4F4F4;
+}
+.dark-mode .dropdown-menu-right .dropdown-item:hover, .dark-mode .dropdown-menu-right .dropdown-item:focus, .dark-mode .dropdown-menu-right .dropdown-item:focus-visible {
+  background-color: rgb(109, 109, 109);
+}
+.dark-mode .text-muted {
+  color: #d6d6d6 !important;
 }/*# sourceMappingURL=css.css.map */

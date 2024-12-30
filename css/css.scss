@@ -895,3 +895,22 @@ select[multiple].form-control {
     }
   }
 }
+
+.dark-mode
+{
+  .dropdown-menu-right
+  {
+    background-color: #535353;
+    .dropdown-item{
+      color: #F4F4F4;
+      &:hover, &:focus, &:focus-visible {
+        background-color: rgb(109, 109, 109);
+      }
+      
+      
+    }
+  }
+  .text-muted{
+    color: #d6d6d6 !important;
+  }
+}
