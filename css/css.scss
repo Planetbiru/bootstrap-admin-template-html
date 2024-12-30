@@ -265,13 +265,31 @@ body.sidebar-hidden .content {
   }
 
   .filter-control
-    {
-      select[multiple]{
-        vertical-align: top;
-        margin-top: 3px;
-        width: 240px;
-      }
+  {
+    select[multiple]{
+      vertical-align: top;
+      margin-top: 3px;
+      width: 240px;
     }
+  }
+  
+  [type="datetime-local"], [type="datetime"]
+  {
+    width: 192px;
+    max-width: 192px;
+  }
+
+  [type="date"]
+  {
+    width: 130px;
+    max-width: 130px;
+  }
+
+  [type="time"]
+  {
+    width: 105px;
+    max-width: 105px;
+  }
 
   button,
   [type="button"],

@@ -200,6 +200,18 @@ body.sidebar-hidden .content {
   margin-top: 3px;
   width: 240px;
 }
+.filter-section [type=datetime-local], .filter-section [type=datetime] {
+  width: 192px;
+  max-width: 192px;
+}
+.filter-section [type=date] {
+  width: 130px;
+  max-width: 130px;
+}
+.filter-section [type=time] {
+  width: 105px;
+  max-width: 105px;
+}
 .filter-section button,
 .filter-section [type=button],
 .filter-section [type=submit] {
@@ -638,18 +650,10 @@ select[multiple].form-control {
 .dark-mode .table th {
   border-top: 1px solid #595a5c;
 }
-.dark-mode .table td::before, 
-.dark-mode .table td::after,
+.dark-mode .table td::before, .dark-mode .table td::after,
 .dark-mode .table th::before,
 .dark-mode .table th::after {
   background-color: #f8f9fa;
-}
-
-.dark-mode .table.table-sort-by-column td::before, 
-.dark-mode .table.table-sort-by-column td::after,
-.dark-mode .table.table-sort-by-column th::before,
-.dark-mode .table.table-sort-by-column th::after {
-  background-color: transparent;
 }
 .dark-mode .table a {
   color: #f8f9fa;

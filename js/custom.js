@@ -3,7 +3,7 @@
  * - Converts the input types to text and applies respective classes.
  * - Initializes datetime pickers with configurable min and max date options.
  */
-function initDatetimePicker() {
+function initDateTimePicker() {
   let debugDatetimePicker = false;
   
   // Change input type from date to text and add class for date-picker
@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMessages(messages);
   initCheckAll();
   initAjaxSupport();
-  initDatetimePicker();
+  initDateTimePicker();
   initMultipleSelect();
   initSortTable();
   initSortData();
