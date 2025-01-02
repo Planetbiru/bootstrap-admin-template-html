@@ -376,6 +376,8 @@ function initPage()
         } else {
             document.body.classList.toggle('sidebar-show'); // Hide or show the sidebar for small screens
         }
+        let hidden = document.body.classList.contains('sidebar-hidden');
+        window.localStorage.setItem('sidebarHidden', hidden ? 'true' : 'false');
     });
   });
 
@@ -392,7 +394,6 @@ function initPage()
       {
         colorMode = 'light-mode';
       }
-      console.log(colorMode)
       window.localStorage.setItem('colorMode', colorMode);
   });
 }
