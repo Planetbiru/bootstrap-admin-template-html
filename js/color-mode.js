@@ -5,7 +5,7 @@ if(cm == null || cm == '')
     cm = 'light-mode';
 }
 document.querySelector('body').classList.add(cm);
-if(hd)
+if(hd == 'true')
 {
     document.querySelector('body').classList.add('sidebar-hidden');
 }
