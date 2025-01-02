@@ -383,6 +383,17 @@ function initPage()
   document.querySelector('.toggle-mode').addEventListener('click', () => {
       document.body.classList.toggle('dark-mode'); // Switch to dark mode
       document.body.classList.toggle('light-mode'); // Switch to light mode
+      let colorMode = '';
+      if(document.body.classList.contains('dark-mode'))
+      {
+        colorMode = 'dark-mode';
+      }
+      else
+      {
+        colorMode = 'light-mode';
+      }
+      console.log(colorMode)
+      window.localStorage.setItem('colorMode', colorMode);
   });
 }
 

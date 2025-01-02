@@ -26,7 +26,7 @@ $color-input-dark2: #e4e4e4; // Darker input color
 // Body styles with transition effects
 body {
   overflow-x: hidden; // Hide horizontal overflow
-  transition: background-color 0.5s, color 0.5s; // Smooth transition for color and background changes
+  transition: background-color 0.1s, color 0.1s; // Smooth transition for color and background changes
 
   .content {
     margin-left: 240px; // Sidebar space
@@ -549,11 +549,11 @@ select[multiple].form-control {
   font-family: Arial, Helvetica, sans-serif;
   height: calc(1.5em + .75rem + 2px);
   background-color: #FFFFFF;
-  border-radius: 3px;
+  border-radius: .25rem;
   border: 1px solid $color-border-light;
 
   .multi-select-header {
-    border-radius: 3px;
+    border-radius: .25rem;
     
     padding: 4px 30px 4px 4px;
     overflow: hidden;
@@ -619,8 +619,8 @@ select[multiple].form-control {
     flex-flow: wrap;
     position: absolute;
     top: 100%;
-    left: 2px;
-    right: 2px;
+    left: 0px;
+    right: 0px;
     z-index: 999;
     margin-top: 0px;
     padding: 2px 1px;
@@ -787,6 +787,33 @@ select[multiple].form-control {
 
 // Dark Mode Styles
 .dark-mode {
+  
+  
+  .input-datetime-wrapper::after {
+    color: #dddddd;
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23dddddd' viewBox='0 0 16 16'%3E%3Cpath d='M8 13.1l-8-8 2.1-2.2 5.9 5.9 5.9-5.9 2.1 2.2z'/%3E%3C/svg%3E");
+  }
+  select:focus {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23dddddd' viewBox='0 0 16 16'%3E%3Cpath d='M8 3.1l-8 8 2.1 2.2 5.9-5.9 5.9 5.9 2.1-2.2z'/%3E%3C/svg%3E");
+  }
+  .multi-select {
+    .multi-select-header {
+      &::after {    
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23dddddd' viewBox='0 0 16 16'%3E%3Cpath d='M8 13.1l-8-8 2.1-2.2 5.9 5.9 5.9-5.9 2.1 2.2z'/%3E%3C/svg%3E");
+      }
+    }
+  }
+  
+  .bootstrap-datetimepicker-widget
+  {
+    background-color: #d0d0d0 !important;
+    a{
+      color: #303030 !important;
+    }
+  }
+  
   a {
     color: #d8dee4;
   }
