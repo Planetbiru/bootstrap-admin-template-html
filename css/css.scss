@@ -966,4 +966,51 @@ select[multiple].form-control {
   tbody .data-sort-body {
     background-color: #6a6a6a;
   }
+  
+  
+  .btn-success {
+    color: #eeeeee;
+    background-color: #135b24;
+    border-color: #156027;
+  }
+  .btn-success:hover {
+    color: #eeeeee;
+    background-color: #16682a;
+    border-color: #135924;
+  }
+  
+  .btn-primary {
+    color: #eeeeee;
+    background-color: #0050a6;
+    border-color: #00458e;
+  }
+  .btn-primary:hover {
+    color: #eeeeee;
+    background-color: #005cbf;
+    border-color: #004fa4;
+  }
+  
+  .btn-warning {
+    color: #eeeeee;
+    background-color: #c90;
+    border-color: #bb8c00;
+  }
+  
+  .btn-warning:hover {
+    color: #eeeeee;
+    background-color: #e0a800;
+    border-color: #d39e00;
+  }
+  
+  .btn-danger {
+    color: #eeeeee;
+    background-color: #991b27;
+    border-color: #861822;
+  }
+  
+  .btn-danger:hover {
+    color: #eeeeee;
+    background-color: #a41e2b;
+    border-color: #931a25;
+  }
 }
