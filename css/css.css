@@ -394,7 +394,7 @@ td[data-order-method=desc] {
   height: 7px;
   border: 2px solid #777777;
   border-width: 0px 0px 2px 2px;
-  right: 0;
+  right: 0.2rem;
   top: 15px;
 }
 
@@ -627,6 +627,10 @@ select[multiple].form-control {
 .table.table-row thead::before, .table.table-row thead::after {
   background-color: #1e2022;
 }
+.table.table-row thead td.data-controll {
+  padding-right: 0.6rem;
+  width: 20px;
+}
 
 .dark-mode .input-datetime-wrapper::after {
   color: #dddddd;
@@ -665,7 +669,7 @@ select[multiple].form-control {
 .dark-mode .table td::before, .dark-mode .table td::after,
 .dark-mode .table th::before,
 .dark-mode .table th::after {
-  background-color: #f8f9fa;
+  background-color: transparent;
 }
 .dark-mode .table a {
   color: #f8f9fa;
@@ -747,6 +751,9 @@ select[multiple].form-control {
   background-color: #262323;
   border: 1px solid #555;
 }
-.dark-mode tbody.data-table-manual-sort .data-sort-body {
+.dark-mode thead .data-sort-header {
+  background-color: #6a6a6a;
+}
+.dark-mode tbody .data-sort-body {
   background-color: #6a6a6a;
 }/*# sourceMappingURL=css.css.map */

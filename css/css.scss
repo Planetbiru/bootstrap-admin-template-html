@@ -504,7 +504,7 @@ td[data-order-method="desc"] {
   height: 7px;
   border: 2px solid #777777;
   border-width: 0px 0px 2px 2px;
-  right: 0;
+  right: 0.2rem;
   top: 15px;
 }
 
@@ -781,6 +781,11 @@ select[multiple].form-control {
   &::after {
     background-color: #1e2022;
   }
+  
+  td.data-controll{
+    padding-right: 0.6rem;
+    width: 20px;
+  }
 }
 
 // Dark Mode Styles
@@ -832,7 +837,7 @@ select[multiple].form-control {
 
       &::before,
       &::after {
-        background-color: $color-text-dark;
+        background-color: transparent;
       }
     }
 
@@ -954,7 +959,11 @@ select[multiple].form-control {
     }
   }
 
-  tbody.data-table-manual-sort .data-sort-body {
+  
+  thead .data-sort-header {
+    background-color: #6a6a6a;
+  }
+  tbody .data-sort-body {
     background-color: #6a6a6a;
   }
 }
