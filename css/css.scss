@@ -468,29 +468,27 @@ thead .data-sort-header {
   background-color: #abadb6;
   cursor: move;
 }
-
-.table-row td {
+.table-row
+{
+ td {
   white-space: nowrap;
   position: relative;
-  padding: 0.5rem 0.4rem;
+  padding: 0.5rem 0 0.5rem 0.2rem;
   &.data-sort{
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 0 0.5rem 0.2rem;
   }
-  &.data-controll{
-    text-align: center;
-  }
+ }
+ .data-selector{
+  padding-left: 0.5rem;
+ }
 }
 
 .table-row thead td {
-  padding: 0.5rem 1.2rem 0.5rem 0.4rem;
   a {
     padding-right: 6px;
   }
   &.data-sort{
     padding: 0.5rem 0.5rem;
-  }
-  &.data-controll{
-    text-align: center;
   }
 }
 
@@ -938,6 +936,25 @@ select[multiple].form-control {
     }
   }
   .text-muted{
-    color: #d6d6d6 !important;
+    color: #d7d7d7 !important;
+  }
+
+  .page-selector
+  {
+    &.page-selected a {
+      background-color: #464646;
+      border-color: #555555;
+      color: #e6e6e6;
+    }
+    
+    a {
+      color: #d7d7d7;
+      background-color: #262323;
+      border: 1px solid #555;
+    }
+  }
+
+  tbody.data-table-manual-sort .data-sort-body {
+    background-color: #6a6a6a;
   }
 }

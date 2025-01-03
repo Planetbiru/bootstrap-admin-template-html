@@ -366,26 +366,20 @@ thead .data-sort-header {
 .table-row td {
   white-space: nowrap;
   position: relative;
-  padding: 0.5rem 0.4rem;
+  padding: 0.5rem 0 0.5rem 0.2rem;
 }
 .table-row td.data-sort {
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 0 0.5rem 0.2rem;
 }
-.table-row td.data-controll {
-  text-align: center;
+.table-row .data-selector {
+  padding-left: 0.5rem;
 }
 
-.table-row thead td {
-  padding: 0.5rem 1.2rem 0.5rem 0.4rem;
-}
 .table-row thead td a {
   padding-right: 6px;
 }
 .table-row thead td.data-sort {
   padding: 0.5rem 0.5rem;
-}
-.table-row thead td.data-controll {
-  text-align: center;
 }
 
 td[data-order-method=asc],
@@ -741,5 +735,18 @@ select[multiple].form-control {
   background-color: rgb(109, 109, 109);
 }
 .dark-mode .text-muted {
-  color: #d6d6d6 !important;
+  color: #d7d7d7 !important;
+}
+.dark-mode .page-selector.page-selected a {
+  background-color: #464646;
+  border-color: #555555;
+  color: #e6e6e6;
+}
+.dark-mode .page-selector a {
+  color: #d7d7d7;
+  background-color: #262323;
+  border: 1px solid #555;
+}
+.dark-mode tbody.data-table-manual-sort .data-sort-body {
+  background-color: #6a6a6a;
 }/*# sourceMappingURL=css.css.map */
