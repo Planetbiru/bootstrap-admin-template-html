@@ -84,16 +84,21 @@ To add a new item to the sidebar menu, simply update the index.html file under t
 
 ```js
     // Notification data from the server in JSON format
-    const notifications = [
-        {"id": 1, "message": "Notification 1", "time": "5 minutes ago"},
-        {"id": 2, "message": "Notification 2", "time": "10 minutes ago"}
-    ];
+    const notifications = {
+        "totalData": 129,
+        "data": [
+            { "id": 1, "link": "notifications.html?any=1", "message": "Notification 1", "time": "5 min"  },
+            { "id": 2, "link": "notifications.html?any=2", "message": "Notification 2", "time": "100 day"}
+    ]}
+    ;
 
     // Message data from the server in JSON format
-    const messages = [
-        {"id": 1, "message": "Message 1", "time": "1 minute ago"},
-        {"id": 2, "message": "Message 2", "time": "3 minutes ago"}
-    ];
+    const messages = {
+        "totalData": 88,
+        "data": [
+            { "id": 1, "link": "messages.html?any=1", "message": "Message 1", "time": "1 min" },
+            { "id": 2, "link": "messages.html?any=2", "message": "Message 2", "time": "3 min" }
+    ]};
 
 ```
 
@@ -190,7 +195,6 @@ Feel free to fork the repository and submit pull requests if you have improvemen
 - Link to MagicAppBuilder - https://github.com/Planetbiru/MagicAppBuilder
 - Link to MagicApp - https://github.com/Planetbiru/MagicApp
 - Link to MagicObject - https://github.com/Planetbiru/MagicObject
-
 
 
 ## License
