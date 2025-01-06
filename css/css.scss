@@ -4,7 +4,7 @@ $color-dark: #212529; // Dark background color
 $color-gray: #343a40; // Gray color for sidebar and borders
 $color-hover: #495057; // Color on hover
 $color-link: #FAFAFA; // Link color
-$color-selected: #2761a3; // Color for selected items
+$color-selected: #225691; // Color for selected items
 $color-input: #dee2e6; // Input fields color
 $color-input-dark: #4f4f4f; // Dark input field color
 $color-background-dark: #212529; // Dark background color
@@ -659,6 +659,7 @@ select[multiple].form-control {
       border: 1px solid $color-input-dark;
       border-radius: 3px;
       display: inline-block;
+      margin-top: 1px;
     }
 
     .multi-select-option .multi-select-option-text,

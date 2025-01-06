@@ -532,6 +532,7 @@ select[multiple].form-control {
   border: 1px solid #4f4f4f;
   border-radius: 3px;
   display: inline-block;
+  margin-top: 1px;
 }
 .multi-select .multi-select-options .multi-select-option .multi-select-option-text,
 .multi-select .multi-select-options .multi-select-all .multi-select-option-text {
@@ -546,7 +547,7 @@ select[multiple].form-control {
 }
 .multi-select .multi-select-options .multi-select-option.multi-select-selected .multi-select-option-radio,
 .multi-select .multi-select-options .multi-select-all.multi-select-selected .multi-select-option-radio {
-  background-color: #2761a3;
+  background-color: #225691;
 }
 .multi-select .multi-select-options .multi-select-option.multi-select-selected .multi-select-option-radio::after,
 .multi-select .multi-select-options .multi-select-all.multi-select-selected .multi-select-option-radio::after {
@@ -561,7 +562,7 @@ select[multiple].form-control {
 }
 .multi-select .multi-select-options .multi-select-option.multi-select-selected .multi-select-option-text,
 .multi-select .multi-select-options .multi-select-all.multi-select-selected .multi-select-option-text {
-  color: #2761a3;
+  color: #225691;
 }
 .multi-select .multi-select-options .multi-select-option:hover, .multi-select .multi-select-options .multi-select-option:active {
   background-color: #f3f4f7;
