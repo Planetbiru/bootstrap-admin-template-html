@@ -80,6 +80,7 @@ a {
       outline: none; // Remove outline when focused or active
     }
   }
+  
 
   .toggle-sidebar {
     float: right;
@@ -701,13 +702,11 @@ select[multiple].form-control {
     }
 
     .multi-select-all {
-
+      border-radius: 0;
       &:hover,
       &:active {
         background-color: $color-option-hover;
       }
-
-      border-radius: 0;
     }
 
     .multi-select-search {
