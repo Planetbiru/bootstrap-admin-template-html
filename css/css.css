@@ -14,9 +14,7 @@ body .content h3 {
   font-size: 1.75rem;
 }
 
-*,
-::before,
-::after {
+*, ::before, ::after {
   box-sizing: border-box;
 }
 
@@ -105,7 +103,7 @@ body.sidebar-hidden .content {
 
 .dark-mode {
   background-color: #212529;
-  color: #f8f9fa;
+  color: #e4e6e8;
 }
 
 .navbar {
@@ -146,12 +144,12 @@ body.sidebar-hidden .content {
 .dark-mode .navbar-nav .nav-link .fas,
 .dark-mode .navbar-nav .btn .fas,
 .dark-mode .navbar-nav .nav-link {
-  color: #f8f9fa;
+  color: #e4e6e8;
 }
 
 .dark-mode .navbar-nav .nav-link:focus,
 .dark-mode .navbar-nav .nav-link:hover {
-  color: #f8f9fa;
+  color: #e4e6e8;
 }
 
 .two-side-responsive-table {
@@ -366,10 +364,10 @@ thead .data-sort-header {
 .table-row td {
   white-space: nowrap;
   position: relative;
-  padding: 0.5rem 0 0.5rem 0.2rem;
+  padding: 0.4rem 0 0.4rem 0.2rem;
 }
 .table-row td.data-sort {
-  padding: 0.5rem 0 0.5rem 0.2rem;
+  padding: 0.4rem 0 0.4rem 0.2rem;
 }
 .table-row .data-selector {
   padding-left: 0.5rem;
@@ -384,7 +382,7 @@ thead .data-sort-header {
 
 td[data-order-method=asc],
 td[data-order-method=desc] {
-  padding: 0.5rem 1.2rem 0.5rem 0.4rem;
+  padding: 0.4rem 1.2rem 0.4rem 0.4rem;
 }
 
 [data-order-method=asc]::after, [data-order-method=desc]::after {
@@ -661,7 +659,7 @@ select[multiple].form-control {
   margin-top: 5px;
 }
 .dark-mode .table {
-  color: #f8f9fa;
+  color: #e4e6e8;
 }
 .dark-mode .table td,
 .dark-mode .table th {
@@ -673,10 +671,10 @@ select[multiple].form-control {
   background-color: transparent;
 }
 .dark-mode .table a {
-  color: #f8f9fa;
+  color: #e4e6e8;
 }
 .dark-mode .table.table-row thead a {
-  color: #f8f9fa;
+  color: #e4e6e8;
 }
 .dark-mode .table.table-row thead a:hover {
   text-decoration: none;
@@ -685,17 +683,17 @@ select[multiple].form-control {
 .dark-mode .form-control {
   background-color: #4f4f4f;
   border-color: #212529;
-  color: #f8f9fa;
+  color: #e4e6e8;
 }
 .dark-mode .multi-select .multi-select-header {
   border-color: #212529;
-  color: #f8f9fa;
+  color: #e4e6e8;
 }
 .dark-mode .multi-select .multi-select-header .multi-select-header-placeholder {
-  color: #f8f9fa;
+  color: #e4e6e8;
 }
 .dark-mode .multi-select .multi-select-header .multi-select-header-option {
-  color: #f8f9fa;
+  color: #e4e6e8;
   background-color: #6d6d6d;
 }
 .dark-mode .multi-select .multi-select-options {
@@ -704,12 +702,12 @@ select[multiple].form-control {
 .dark-mode .multi-select .multi-select-options .multi-select-search {
   box-sizing: border-box;
   background-color: #4f4f4f;
-  color: #f8f9fa;
+  color: #e4e6e8;
   border-color: #666666;
 }
 .dark-mode .multi-select .multi-select-options .multi-select-option.multi-select-selected .multi-select-option-text,
 .dark-mode .multi-select .multi-select-options .multi-select-all.multi-select-selected .multi-select-option-text {
-  color: #f8f9fa;
+  color: #e4e6e8;
 }
 .dark-mode .multi-select .multi-select-options .multi-select-option .multi-select-option-radio,
 .dark-mode .multi-select .multi-select-options .multi-select-all .multi-select-option-radio {
@@ -759,42 +757,56 @@ select[multiple].form-control {
   background-color: #6a6a6a;
 }
 .dark-mode .btn-success {
-  color: #eeeeee;
+  color: #e8e8e8;
   background-color: #135b24;
   border-color: #156027;
 }
 .dark-mode .btn-success:hover {
-  color: #eeeeee;
+  color: #e8e8e8;
   background-color: #16682a;
   border-color: #135924;
 }
 .dark-mode .btn-primary {
-  color: #eeeeee;
+  color: #e8e8e8;
   background-color: #0050a6;
   border-color: #00458e;
 }
 .dark-mode .btn-primary:hover {
-  color: #eeeeee;
+  color: #e8e8e8;
   background-color: #005cbf;
   border-color: #004fa4;
 }
+.dark-mode .btn-secondary {
+  color: #e8e8e8;
+  background-color: #424242;
+  border-color: #424242;
+}
+.dark-mode .btn-secondary:hover {
+  color: #e8e8e8;
+  background-color: #4f4f4f;
+  border-color: #4f4f4f;
+}
 .dark-mode .btn-warning {
-  color: #eeeeee;
+  color: #e8e8e8;
   background-color: #c90;
   border-color: #bb8c00;
 }
 .dark-mode .btn-warning:hover {
-  color: #eeeeee;
+  color: #e8e8e8;
   background-color: #e0a800;
   border-color: #d39e00;
 }
 .dark-mode .btn-danger {
-  color: #eeeeee;
+  color: #e8e8e8;
   background-color: #991b27;
   border-color: #861822;
 }
 .dark-mode .btn-danger:hover {
-  color: #eeeeee;
+  color: #e8e8e8;
   background-color: #a41e2b;
   border-color: #931a25;
+}
+
+textarea.form-control {
+  min-height: 38px;
 }/*# sourceMappingURL=css.css.map */
