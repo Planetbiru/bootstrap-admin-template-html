@@ -527,7 +527,7 @@ select[multiple].form-control {
   margin-right: 6px;
   height: 16px;
   width: 16px;
-  border: 1px solid #4f4f4f;
+  border: 1px solid #464646;
   border-radius: 3px;
   display: inline-block;
   margin-top: 1px;
@@ -681,7 +681,7 @@ select[multiple].form-control {
 }
 .dark-mode .multi-select,
 .dark-mode .form-control {
-  background-color: #4f4f4f;
+  background-color: #464646;
   border-color: #212529;
   color: #e4e6e8;
 }
@@ -697,11 +697,11 @@ select[multiple].form-control {
   background-color: #6d6d6d;
 }
 .dark-mode .multi-select .multi-select-options {
-  background-color: #4f4f4f;
+  background-color: #464646;
 }
 .dark-mode .multi-select .multi-select-options .multi-select-search {
   box-sizing: border-box;
-  background-color: #4f4f4f;
+  background-color: #464646;
   color: #e4e6e8;
   border-color: #666666;
 }
@@ -711,7 +711,7 @@ select[multiple].form-control {
 }
 .dark-mode .multi-select .multi-select-options .multi-select-option .multi-select-option-radio,
 .dark-mode .multi-select .multi-select-options .multi-select-all .multi-select-option-radio {
-  border: 1px solid #a7a7a7;
+  border: 1px solid #717171;
 }
 .dark-mode .multi-select .multi-select-all {
   border-color: #444444;

@@ -1,3 +1,24 @@
+<?php
+require_once "TemplateDropdownMenu.php";
+
+// Example usage
+$notifications = [
+    'data' => [
+        ['id' => 1, 'message' => 'New comment on your post', 'time' => '2 minutes ago', 'link' => '/comment/1', 'timestamp'=>time()*1000],
+        ['id' => 2, 'message' => 'Your order has shipped', 'time' => '5 minutes ago', 'link' => '/order/123', 'timestamp'=>time()*1000],
+    ],
+    'totalData' => 8
+];
+
+$messages = [
+    'data' => [
+        ['id' => 1, 'message' => 'John Doe sent you a message', 'time' => '10 minutes ago', 'link' => '/message/1', 'timestamp'=>time()*1000],
+        ['id' => 2, 'message' => 'Jane Smith sent you a message', 'time' => '30 minutes ago', 'link' => '/message/2', 'timestamp'=>time()*1000],
+    ],
+    'totalData' => 5
+];
+
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -93,32 +114,22 @@
     </div>
 
     <!-- Main Content -->
+    <?php
+    $dd = new TemplateDrowpdownMenu();
+    ?>
     <div class="content">
         <nav class="navbar navbar-expand navbar-light"> <!-- Navbar at the top -->
             <button class="btn btn-outline-secondary toggle-sidebar"><i class="fas fa-bars"></i></button>
             <!-- Button to toggle sidebar -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto"> <!-- Menu on the right side of the navbar -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button"
-                            data-toggle="dropdown">
-                            <i class="fas fa-bell"></i> <!-- Notification icon -->
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown"
-                            id="notificationMenu">
-                            <!-- Notifications will be populated by JavaScript -->
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button"
-                            data-toggle="dropdown">
-                            <i class="fas fa-comments"></i> <!-- Message icon -->
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messageDropdown"
-                            id="messageMenu">
-                            <!-- Messages will be populated by JavaScript -->
-                        </div>
-                    </li>
+                    
+                    <?php
+                    $ddmenu = new TemplateDrowpdownMenu();
+                    echo $ddmenu->dropdownMenu($notifications, 'notificationDropdown', 'notificationMenu', 'fas fa-bell'); // Output notifications
+                    echo $ddmenu->dropdownMenu($messages, 'messageDropdown', 'messageMenu', 'fas fa-comments'); // Output messages
+                    ?>
+                
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button"
                             data-toggle="dropdown">

@@ -330,55 +330,62 @@ function splitWithTail(str, delimiter, count) {
 
 /**
  * Initializes notifications in the dropdown menu.
- * @param {Array} notifications Array of notification objects containing message, time, and link.
+ * @param {Array} data Array of notification objects containing message, time, and link.
  */
-function initNotifications(notifications) {
-  const notificationMenu = document.querySelector('#notificationMenu');
-  notifications.data.forEach(notification => {
-      const a = document.createElement('a');
-      a.className = 'dropdown-item';
-      a.href = notification.link;
-      a.innerHTML = `${notification.message} <small class="text-muted">${notification.time}</small>`;
-      a.dataset.id = notification.id; // Adding ID to the notification item
-      notificationMenu.appendChild(a);
-  });
-  let badge = '';
-  if(notifications.totalData > 99)
+function initNotifications(data) {
+  if(data != null)
   {
-    badge = '99+';
+    const dropdownElement = document.querySelector('#notificationMenu');
+    dropdownElement.innerHTML = '';
+    data.data.forEach(notification => {
+        const a = document.createElement('a');
+        a.className = 'dropdown-item';
+        a.href = notification.link;
+        a.innerHTML = `${notification.message} <small class="text-muted">${notification.time}</small>`;
+        a.dataset.id = notification.id; // Adding ID to the notification item
+        dropdownElement.appendChild(a);
+    });
+    let badge = '';
+    if(data.totalData > 99)
+    {
+      badge = '99+';
+    }
+    else if(data.totalData > 0 && data.totalData <= 99)
+    {
+      badge = data.totalData;
+    }
+    dropdownElement.closest('li.nav-item').setAttribute('data-badge', badge);
   }
-  else if(notifications.totalData > 0 && notifications.totalData <= 99)
-  {
-    badge = notifications.totalData;
-  }
-  notificationMenu.closest('li.nav-item').setAttribute('data-badge', badge);
 }
 
 /**
  * Initializes messages in the dropdown menu.
- * @param {Array} messages Array of message objects containing message, time, and link.
+ * @param {Array} data Array of message objects containing message, time, and link.
  */
-function initMessages(messages) {
-  const messageMenu = document.querySelector('#messageMenu');
-  messages.data.forEach(message => {
-      const a = document.createElement('a');
-      a.className = 'dropdown-item';
-      a.href = message.link;
-      a.innerHTML = `${message.message} <small class="text-muted">${message.time}</small>`;
-      a.dataset.id = message.id; // Adding ID to the message item
-      messageMenu.appendChild(a);
-  });
-  let badge = '';
-  if(messages.totalData > 99)
+function initMessages(data) {
+  if(data != null)
   {
-    badge = '99+';
+    const dropdownElement = document.querySelector('#messageMenu');
+    dropdownElement.innerHTML = '';
+    data.data.forEach(message => {
+        const a = document.createElement('a');
+        a.className = 'dropdown-item';
+        a.href = message.link;
+        a.innerHTML = `${message.message} <small class="text-muted">${message.time}</small>`;
+        a.dataset.id = message.id; // Adding ID to the message item
+        dropdownElement.appendChild(a);
+    });
+    let badge = '';
+    if(data.totalData > 99)
+    {
+      badge = '99+';
+    }
+    else if(data.totalData > 0 && data.totalData <= 99)
+    {
+      badge = data.totalData;
+    }
+    dropdownElement.closest('li.nav-item').setAttribute('data-badge', badge);
   }
-  else if(messages.totalData > 0 && messages.totalData <= 99)
-  {
-    badge = messages.totalData;
-  }
-  messageMenu.closest('li.nav-item').setAttribute('data-badge', badge);
-
 }
 
 /**
