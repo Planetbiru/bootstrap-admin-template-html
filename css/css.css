@@ -159,7 +159,7 @@ body.sidebar-hidden .content {
   border-collapse: collapse;
 }
 .two-side-responsive-table > tbody > tr > td {
-  padding: 5px 0;
+  padding: 0.2rem 0;
 }
 .two-side-responsive-table > tbody > tr > td:nth-child(1) {
   width: 240px;
@@ -278,7 +278,7 @@ body.sidebar-hidden .content {
 }
 
 .pagination-bottom {
-  padding: 10px 0 5px 0;
+  padding: 8px 0 8px 0;
 }
 
 .pagination-number {
@@ -336,7 +336,7 @@ body.sidebar-hidden .content {
   }
 }
 .data-section {
-  padding: 10px 0;
+  padding: 10px 0 0 0;
 }
 
 .data-wrapper {
@@ -366,7 +366,7 @@ thead .data-sort-header {
 .table-row td {
   white-space: nowrap;
   position: relative;
-  padding: 0.5rem 0 0.5rem 0.2rem;
+  padding: 0.35rem 0 0.35rem 0.2rem;
 }
 .table-row td.data-sort {
   padding: 0.5rem 0 0.5rem 0.2rem;

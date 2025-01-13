@@ -215,7 +215,7 @@ body.sidebar-hidden .content {
   >tbody {
     >tr {
       >td {
-        padding: 5px 0; // Padding for table cells
+        padding: 0.2rem 0; // Padding for table cells
 
         &:nth-child(1) {
           width: 240px; // Fixed width for the first column
@@ -373,7 +373,7 @@ body.sidebar-hidden .content {
 }
 
 .pagination-bottom {
-  padding: 10px 0 5px 0; // Padding for the bottom pagination
+  padding: 8px 0 8px 0; // Padding for the bottom pagination
 }
 
 .pagination-number {
@@ -439,7 +439,7 @@ body.sidebar-hidden .content {
 }
 
 .data-section {
-  padding: 10px 0;
+  padding: 10px 0 0 0;
 }
 
 // Sort Table
@@ -473,7 +473,7 @@ thead .data-sort-header {
  td {
   white-space: nowrap;
   position: relative;
-  padding: 0.5rem 0 0.5rem 0.2rem;
+  padding: 0.35rem 0 0.35rem 0.2rem;
   &.data-sort{
     padding: 0.5rem 0 0.5rem 0.2rem;
   }
