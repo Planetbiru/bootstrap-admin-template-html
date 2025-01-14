@@ -55,19 +55,15 @@ a {
 .sidebar {
   height: 100vh; // Full viewport height
   width: 240px; // Sidebar width
-  background: $color-gray; // Sidebar background color
   position: fixed; // Fixed position on the screen
   padding-top: 20px; // Padding on top of the sidebar
   transition: transform 0.3s ease; // Smooth transition for sidebar movement
   transform: translateX(0); // Initially positioned at the left side of the screen
+  border-right: 1px solid #d1d1d1;
+  
+  background-color: #f7f7f7;
 
-  a {
-    color: $color-link; // Link color in sidebar
-  }
 
-  .nav-link:hover {
-    background-color: $color-hover; // Hover effect on navigation links
-  }
 
   .button-transparent {
     background-color: transparent; // Transparent button background
@@ -91,23 +87,50 @@ a {
       color: $color-link; // Color of items inside the toggle button
     }
   }
+  
+  h4 {
+    font-size: 1.25rem; // Font size for sidebar headers
+  
+    a {
+      display: block;
+  
+      &:hover {
+        text-decoration: none; // Remove underline from links on hover
+      }
+    }
+  }
+  a {
+    color: #313131; // Default link color
+  }
 }
+
+
 
 .sidebar-hidden .sidebar {
   transform: translateX(-240px); // Move sidebar off-screen when hidden
 }
 
-.sidebar h4 {
-  font-size: 1.25rem; // Font size for sidebar headers
+.sidebar {
+  .nav-link:hover {
+    background-color: #eaeaea; // Hover effect on navigation links
+  }
+}
 
-  a {
-    display: block;
+.dark-mode{
+  .sidebar
+  {
+    border-right: 1px solid #464646;
 
-    &:hover {
-      text-decoration: none; // Remove underline from links on hover
+    background: $color-dark; // Sidebar background color
+    a {
+      color: $color-link; // Link color in sidebar
+    }
+    .nav-link:hover {
+      background-color: $color-hover; // Hover effect on navigation links
     }
   }
 }
+
 
 // Content styles when sidebar is hidden
 body.sidebar-hidden .content {
