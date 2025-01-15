@@ -14,7 +14,9 @@ body .content h3 {
   font-size: 1.75rem;
 }
 
-*, ::before, ::after {
+*,
+::before,
+::after {
   box-sizing: border-box;
 }
 
@@ -210,7 +212,8 @@ body.sidebar-hidden .content {
   margin-top: 3px;
   width: 240px;
 }
-.filter-section [type=datetime-local], .filter-section [type=datetime] {
+.filter-section [type=datetime-local],
+.filter-section [type=datetime] {
   width: 192px;
   max-width: 192px;
 }
@@ -397,7 +400,8 @@ td[data-order-method=desc] {
   padding: 0.4rem 1.2rem 0.4rem 0.4rem;
 }
 
-[data-order-method=asc]::after, [data-order-method=desc]::after {
+[data-order-method=asc]::after,
+[data-order-method=desc]::after {
   content: "";
   position: absolute;
   width: 7px;
@@ -821,4 +825,30 @@ select[multiple].form-control {
 
 textarea.form-control {
   min-height: 38px;
+}
+
+.form-check-input {
+  position: static;
+  margin-left: 0px;
+}
+
+.filter-section select.form-control {
+  padding-right: 28px;
+  box-sizing: border-box;
+}
+
+.content h2 a {
+  color: #212529;
+}
+.content h2 a:hover {
+  text-decoration: none;
+}
+
+.dark-mode .content h2 a {
+  color: #ffffff;
+}
+
+.sidebar .fas {
+  width: 18px !important;
+  text-align: center;
 }/*# sourceMappingURL=css.css.map */
