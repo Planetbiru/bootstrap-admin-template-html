@@ -577,46 +577,6 @@ textarea.form-control {
   margin-bottom: 6px;
 }
 
-/** Summernote **/
-.note-editor .note-toolbar .btn-light {
-  background-color: #fff;
-}
-
-.dark-mode .menu-separator {
-  border-bottom: 1px solid #5e5e5e;
-  border-top: 1px solid #444;
-}
-.dark-mode .note-editor {
-  background-color: #333;
-}
-.dark-mode .note-editor .note-dropdown-menu {
-  background-color: #3d3d3d;
-  color: #fff;
-}
-.dark-mode .note-editor .note-dropdown-menu .dropdown-item:focus,
-.dark-mode .note-editor .note-dropdown-menu .dropdown-item:hover {
-  color: #fff;
-  text-decoration: none;
-  background-color: #575757;
-}
-.dark-mode .note-editor .note-toolbar .btn-light {
-  background-color: #4f4f4f;
-  color: #FAFAFA;
-}
-.dark-mode .note-editor .note-toolbar .note-dropdown-menu.note-check a i {
-  color: #e0e0e0;
-  visibility: hidden;
-}
-.dark-mode .note-editor .note-toolbar .note-btn-group .note-table {
-  background-color: #535353;
-}
-.dark-mode .note-editor.note-frame .note-statusbar .note-resizebar {
-  background-color: #4a4a4a;
-}
-.dark-mode .note-editor.note-frame .note-statusbar .note-resizebar .note-icon-bar {
-  border-top: 1px solid #979797;
-}
-
 select[multiple].form-control {
   height: 38px;
 }
@@ -809,7 +769,7 @@ select[multiple].form-control {
   padding-left: 20px;
 }
 .multi-select .multi-select-options-container {
-  height: 140px;
+  max-height: 140px;
   overflow-y: auto;
   border-top: 1px solid #dee2e6;
   margin-top: 5px;
