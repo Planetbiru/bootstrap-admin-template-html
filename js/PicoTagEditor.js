@@ -235,12 +235,24 @@ function PicoTagEditor(input, options, callback) {
                 {
                     clearTimeout(_this.timeout);
                 }
-                if (!_this.mouseEnter && !_this.focus) {
-                    _this.timeout = setTimeout(() => _this.containerElement.setAttribute('data-focus', 'false'), 1500);
+                if (!_this.mouseEnter && !_this.focus && !_this.settings.debug) {
+                    _this.waitingForHide(1500);
                 }
             });
         });
     };
+
+    /**
+     * Delays hiding the tag editor container by setting a timeout.
+     * This function sets the `data-focus` attribute of the container to `false`
+     * after the specified waiting time, allowing a smooth transition effect.
+     *
+     * @param {number} waitingTime - The delay time in milliseconds before hiding the container.
+     */
+    this.waitingForHide = function(waitingTime) {
+        this.timeout = setTimeout(() => _this.containerElement.setAttribute('data-focus', 'false'), waitingTime);
+    };
+
 
     /**
      * Adds a new tag to the tag editor.

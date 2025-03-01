@@ -204,7 +204,9 @@ function initAjaxSupport() {
 
 /**
  * Initializes the multiple input feature for input fields with the "data-multiple-input" attribute.
- * It sets up a PicoTagEditor and configures date/time pickers for supported input types.
+ * This function:
+ * - Sets up a **PicoTagEditor** for each applicable input field.
+ * - Configures **date/time pickers** for input fields of type `date`, `time`, `datetime`, and `datetime-local`.
  */
 function initMultipleInput() {
   let debugDatetimePicker = false;
@@ -212,56 +214,77 @@ function initMultipleInput() {
   // Select all input elements that have the "data-multiple-input" attribute
   $('input[data-multiple-input]').each(function (index, element) {
       let obj = $(this);
+      
+      /**
+       * Determines if the input field is a date/time-related input type.
+       * This is used to apply specific configurations.
+       * 
+       * @type {boolean}
+       */
       let isDateType = obj.is('input[type="date"], input[type="time"], input[type="datetime"], input[type="datetime-local"]');
+
+      /**
+       * Configuration options for the PicoTagEditor instance.
+       * - `maxHeight`: Limits the maximum height of the tag editor container.
+       * - `trimInput`: Trims input values before adding them as tags (for date inputs).
+       * - `debug`: Enables or disables debug mode.
+       * - `minWidth`: Ensures a minimum width when used with date/time pickers.
+       */
       let options = { maxHeight: 120, trimInput: isDateType, debug: false };
-      if(isDateType)
-      {
-        // Ensure the tag container is wider than the date-time picker.
-        options.minWidth = 260;
+      if (isDateType) {
+          // Ensure the tag container is wider than the date-time picker.
+          options.minWidth = 260;
       }
 
-      // Initialize PicoTagEditor for each element
-      let te = new PicoTagEditor(element, options, function (elem, container, editor) {
-        if (!isDateType) 
-        {
-          return;
-        }
+      /**
+       * Initializes PicoTagEditor for the current input element.
+       *
+       * @param {HTMLElement} elem - The transformed input element.
+       * @param {HTMLElement} container - The tag editor container.
+       * @param {Object} editor - The PicoTagEditor instance.
+       */
+      let te = new PicoTagEditor(element, options, function (elem, container, editor) /*NOSONAR*/ {
+          if (!isDateType) {
+              return; // No need to initialize a date/time picker for non-date inputs.
+          }
 
-        let inpuElement = $(elem);
-        let typeMap = { 'date': 'date', 'time': 'time', 'datetime': 'date-time', 'datetime-local': 'date-time' };
-        let cls = typeMap[inpuElement.attr('type')] || '';
-        
-        // Change the input type to text and add relevant classes
-        inpuElement.attr('type', 'text').addClass(`${cls}-picker-multiple pico-tag-edit`);
-        
-        // Wrap the input element inside a div for styling purposes
-        inpuElement.wrap(`<div class="input-datetime-wrapper ${cls}"></div>`);
+          let inpuElement = $(elem);
 
-        // Update input element
-        inpuElement = $(container).find('.pico-tag-edit');
+          /**
+           * Maps input types to corresponding date/time picker classes.
+           */
+          let typeMap = { 'date': 'date', 'time': 'time', 'datetime': 'date-time', 'datetime-local': 'date-time' };
+          let cls = typeMap[inpuElement.attr('type')] || '';
+          
+          // Change the input type to text (required for the date/time picker)
+          inpuElement.attr('type', 'text').addClass(`${cls}-picker-multiple pico-tag-edit`);
 
-        // Store a reference to the input element in the editor
-        editor.inpuElement = inpuElement[0];
+          // Wrap the input element inside a div for better styling
+          inpuElement.wrap(`<div class="input-datetime-wrapper ${cls}"></div>`);
 
-        // Retrieve the appropriate DateTimePicker options
-        let dpOptions = getDatePickerOptions(inpuElement, debugDatetimePicker);
-        if (dpOptions) {
-            // Initialize the DateTimePicker with the retrieved options
-            inpuElement.datetimepicker(dpOptions)
-                .on('dp.change', () => inpuElement.datetimepicker('hide')) // Hide on change
-                .on('dp.enter', () => { // Handle "enter" event
-                  let val = inpuElement.val();
-                  if(val.trim() != '')
-                  {
-                    editor.addTag(val); // Add entered value as a tag
-                    inpuElement.val(''); // Clear input field
-                    if(!editor.settings.debug)
-                    {
-                      editor.timeout = setTimeout(() => container.setAttribute('data-focus', 'false'), 1500);
-                    }
-                  }
-                });
-        }
+          // Find the new input element inside the container
+          inpuElement = $(container).find('.pico-tag-edit');
+
+          // Store a reference to the input element in the editor
+          editor.inputElement = inpuElement[0];
+
+          // Retrieve the appropriate DateTimePicker options
+          let dpOptions = getDatePickerOptions(inpuElement, debugDatetimePicker);
+          if (dpOptions) {
+              // Initialize the DateTimePicker with the retrieved options
+              inpuElement.datetimepicker(dpOptions)
+                  .on('dp.change', () => inpuElement.datetimepicker('hide')) // Hide on change
+                  .on('dp.enter', () => { // Handle "Enter" key event
+                      let val = inpuElement.val();
+                      if (val.trim() !== '') {
+                          editor.addTag(val); // Add entered value as a tag
+                          inpuElement.val(''); // Clear input field
+                          if (!editor.settings.debug) {
+                              editor.waitingForHide(1500);
+                          }
+                      }
+                  });
+          }
       });
   });
 }
