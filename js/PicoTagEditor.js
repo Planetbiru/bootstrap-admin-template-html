@@ -80,7 +80,6 @@ function PicoTagEditor(input, options, callback) {
      */
     this.placeholder = '';
 
-
     /**
      * Initializes the tag editor, transforming the original input field into an interactive tag manager.
      *
@@ -126,7 +125,6 @@ function PicoTagEditor(input, options, callback) {
             newInput.classList.add('pico-tag-edit');
         }
         this.placeholder = newInput.getAttribute('placeholder') || '';
-        
     };
 
     /**
@@ -165,7 +163,10 @@ function PicoTagEditor(input, options, callback) {
         ['mouseenter', 'mouseleave'].forEach(eventType => {
             this.containerElement.addEventListener(eventType, () => {
                 _this.mouseEnter = eventType === 'mouseenter';
-                if (_this.timeout) clearTimeout(_this.timeout);
+                if (_this.timeout) 
+                {
+                    clearTimeout(_this.timeout);
+                }
                 if (!_this.mouseEnter) {
                     _this.timeout = setTimeout(() => _this.containerElement.setAttribute('data-focus', 'false'), 1500);
                 }
