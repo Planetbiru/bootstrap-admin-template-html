@@ -3,47 +3,29 @@
  * - Converts the input types to text and applies respective classes.
  * - Initializes datetime pickers with configurable min and max date options.
  */
-function initDatetimePicker() {
+function initDateTimePicker() {
   let debugDatetimePicker = false;
   
   // Change input type from date to text and add class for date-picker
-  $('input[type="date"]').each(function (index, element) {
+  $('input[type="date"], input[type="time"], input[type="datetime"], input[type="datetime-local"]').each(function (index, element) { 
     let obj = $(this);
-    obj.attr('type', 'text');
-    obj.addClass('date-picker');
-    let html = obj[0].outerHTML;
-    let html2 =
-      '<div class="input-datetime-wrapper date">\r\n' +
-      html + '\r\n' +
-      '</div>\r\n';
-    obj.replaceWith(html2);
+    let type = obj.attr('type');
+    let map = {'date':'date', 'time':'time', 'datetime':'date-time', 'datetime-local':'date-time'};
+    let cls = map[type];
+    if(obj.attr("data-multiple-input") === undefined)
+    {
+      obj.attr('type', 'text');
+      obj.addClass(`${cls}-picker`);
+      let html = obj[0].outerHTML;
+      let html2 =
+        `<div class="input-datetime-wrapper ${cls}">
+        ${html}
+        </div>`;
+      obj.replaceWith(html2);
+    }
   });
 
-  // Change input type from time to text and add class for time-picker
-  $('input[type="time"]').each(function (index, element) {
-    let obj = $(this);
-    obj.attr('type', 'text');
-    obj.addClass('time-picker');
-    let html = obj[0].outerHTML;
-    let html2 =
-      '<div class="input-datetime-wrapper time">\r\n' +
-      html + '\r\n' +
-      '</div>\r\n';
-    obj.replaceWith(html2);
-  });
-
-  // Change input type from datetime-local to text and add class for date-time-picker
-  $('input[type="datetime-local"]').each(function (index, element) {
-    let obj = $(this);
-    obj.attr('type', 'text');
-    obj.addClass('date-time-picker');
-    let html = obj[0].outerHTML;
-    let html2 =
-      '<div class="input-datetime-wrapper date-time">\r\n' +
-      html + '\r\n' +
-      '</div>\r\n';
-    obj.replaceWith(html2);
-  });
+  
 
   // Initialize date-picker if there are inputs with the class 'date-picker'
   if ($('.date-picker').length) {
@@ -95,12 +77,9 @@ function initDatetimePicker() {
  * - Modifies the URL with updated sorting parameters.
  */
 function initSortTable() {
-  // Select all tables with the class 'table-sort-by-column'
-  document.querySelectorAll("table.table-sort-by-column").forEach(function (thisTable) {
-    // Get the 'data-self-name' attribute of the table
-    let self = thisTable.getAttribute("data-self-name");
-    
-    // Get the current URL and process it
+  const tables = document.querySelectorAll("table.table-sort-by-column");
+  
+  tables.forEach(function (thisTable) {
     let originalURL = document.location.toString();
     let arr0 = originalURL.split("#");
     originalURL = arr0[0];
@@ -110,23 +89,21 @@ function initSortTable() {
     let argArray = args.split("&");
     let queryObject = {};
 
-    // Parse the query parameters into an object
-    argArray.forEach(function (param) {
+    argArray.forEach(function(param) {
       let arr2 = param.split("=");
       if (arr2[0] !== "") {
         queryObject[arr2[0]] = arr2[1];
       }
     });
 
-    // Get the current order method and last column
     let currentOrderMethod = queryObject.ordertype || "";
     let lastColumn = queryObject.orderby || "";
 
-    // Find all 'td' elements with the class 'order-controll' in the table
-    thisTable.querySelectorAll("td.order-controll").forEach(function (thisCel) {
+    const cells = thisTable.querySelectorAll("td.order-controll");
+
+    cells.forEach(function (thisCel) {
       let columnName = thisCel.getAttribute("data-col-name");
 
-      // If this column is the last sorted column, toggle the sorting order
       if (lastColumn === columnName) {
         if (currentOrderMethod === "asc") {
           queryObject.ordertype = "desc";
@@ -138,20 +115,20 @@ function initSortTable() {
       } else {
         queryObject.ordertype = "asc";
       }
+
       queryObject.orderby = columnName;
 
-      // Rebuild the query string
       let arr3 = [];
       for (let key in queryObject) {
         if (queryObject.hasOwnProperty(key)) {
           arr3.push(key + "=" + queryObject[key]);
         }
       }
+
       let args3 = arr3.join("&");
       let finalURL = originalURL + "?" + args3;
-
-      // Update the 'href' attribute of the link inside the cell
-      let link = thisCel.querySelector(" > a");
+      let link = thisCel.querySelector("a");
+      
       if (link) {
         link.setAttribute("href", finalURL);
       }
@@ -224,6 +201,108 @@ function initAjaxSupport() {
     });
   }
 }
+
+/**
+ * Initializes the multiple input feature for input fields with the "data-multiple-input" attribute.
+ * It sets up a PicoTagEditor and configures date/time pickers for supported input types.
+ */
+function initMultipleInput() {
+  let debugDatetimePicker = false;
+
+  // Select all input elements that have the "data-multiple-input" attribute
+  $('input[data-multiple-input]').each(function (index, element) {
+      let obj = $(this);
+      let isDateType = obj.is('input[type="date"], input[type="time"], input[type="datetime"], input[type="datetime-local"]');
+      let options = { maxHeight: 120, trimInput: isDateType, debug: false };
+      if(isDateType)
+      {
+        // Ensure the tag container is wider than the date-time picker.
+        options.minWidth = 260;
+      }
+
+      // Initialize PicoTagEditor for each element
+      let te = new PicoTagEditor(element, options, function (elem, container, editor) {
+        if (!isDateType) 
+        {
+          return;
+        }
+
+        let inpuElement = $(elem);
+        let typeMap = { 'date': 'date', 'time': 'time', 'datetime': 'date-time', 'datetime-local': 'date-time' };
+        let cls = typeMap[inpuElement.attr('type')] || '';
+        
+        // Change the input type to text and add relevant classes
+        inpuElement.attr('type', 'text').addClass(`${cls}-picker-multiple pico-tag-edit`);
+        
+        // Wrap the input element inside a div for styling purposes
+        inpuElement.wrap(`<div class="input-datetime-wrapper ${cls}"></div>`);
+
+        // Update input element
+        inpuElement = $(container).find('.pico-tag-edit');
+
+        // Store a reference to the input element in the editor
+        editor.inpuElement = inpuElement[0];
+
+        // Retrieve the appropriate DateTimePicker options
+        let dpOptions = getDatePickerOptions(inpuElement, debugDatetimePicker);
+        if (dpOptions) {
+            // Initialize the DateTimePicker with the retrieved options
+            inpuElement.datetimepicker(dpOptions)
+                .on('dp.change', () => inpuElement.datetimepicker('hide')) // Hide on change
+                .on('dp.enter', () => { // Handle "enter" event
+                  let val = inpuElement.val();
+                  if(val.trim() != '')
+                  {
+                    editor.addTag(val); // Add entered value as a tag
+                    inpuElement.val(''); // Clear input field
+                    if(!editor.settings.debug)
+                    {
+                      editor.timeout = setTimeout(() => container.setAttribute('data-focus', 'false'), 1500);
+                    }
+                  }
+                });
+        }
+      });
+  });
+}
+
+/**
+* Retrieves DateTimePicker configuration options based on the input element's class.
+* 
+* @param {jQuery} inpuElement - The input element wrapped in jQuery.
+* @param {boolean} debug - Whether to enable debug mode for the DateTimePicker.
+* @returns {object|null} DateTimePicker options or null if the element does not require DateTimePicker.
+*/
+function getDatePickerOptions(inpuElement, debug) {
+  let options = {};
+
+  if (inpuElement.hasClass('date-picker-multiple')) {
+      // Options for date picker
+      options = {
+          minDate: inpuElement.data('mindate') || false,
+          maxDate: inpuElement.data('maxdate') || false,
+          format: 'YYYY-MM-DD',
+          debug
+      };
+  } else if (inpuElement.hasClass('time-picker-multiple')) {
+      // Options for time picker
+      options = { format: 'HH:mm:ss', debug };
+  } else if (inpuElement.hasClass('date-time-picker-multiple')) {
+      // Options for date-time picker
+      options = {
+          minDate: inpuElement.data('mindate') || false,
+          maxDate: inpuElement.data('maxdate') || false,
+          format: 'YYYY-MM-DD HH:mm:ss',
+          useCurrent: 'day',
+          debug
+      };
+  }
+
+  // Return options if valid, otherwise return null
+  return Object.keys(options).length ? options : null;
+}
+
+
 
 /**
  * Initializes multiple select dropdowns using the MultiSelect library.
@@ -334,34 +413,62 @@ function splitWithTail(str, delimiter, count) {
 
 /**
  * Initializes notifications in the dropdown menu.
- * @param {Array} notifications Array of notification objects containing message, time, and link.
+ * @param {Array} data Array of notification objects containing message, time, and link.
  */
-function initNotifications(notifications) {
-  const notificationMenu = document.getElementById('notificationMenu');
-  notifications.forEach(notification => {
-      const a = document.createElement('a');
-      a.className = 'dropdown-item';
-      a.href = notification.link;
-      a.innerHTML = `${notification.message} <small class="text-muted">${notification.time}</small>`;
-      a.dataset.id = notification.id; // Adding ID to the notification item
-      notificationMenu.appendChild(a);
-  });
+function initNotifications(data) {
+  if(data != null)
+  {
+    const dropdownElement = document.querySelector('#notificationMenu');
+    dropdownElement.innerHTML = '';
+    data.data.forEach(notification => {
+        const a = document.createElement('a');
+        a.className = 'dropdown-item';
+        a.href = notification.link;
+        a.innerHTML = `${notification.message} <small class="text-muted">${notification.time}</small>`;
+        a.dataset.id = notification.id; // Adding ID to the notification item
+        dropdownElement.appendChild(a);
+    });
+    let badge = '';
+    if(data.totalData > 99)
+    {
+      badge = '99+';
+    }
+    else if(data.totalData > 0 && data.totalData <= 99)
+    {
+      badge = data.totalData;
+    }
+    dropdownElement.closest('li.nav-item').setAttribute('data-badge', badge);
+  }
 }
 
 /**
  * Initializes messages in the dropdown menu.
- * @param {Array} messages Array of message objects containing message, time, and link.
+ * @param {Array} data Array of message objects containing message, time, and link.
  */
-function initMessages(messages) {
-  const messageMenu = document.getElementById('messageMenu');
-  messages.forEach(message => {
-      const a = document.createElement('a');
-      a.className = 'dropdown-item';
-      a.href = message.link;
-      a.innerHTML = `${message.message} <small class="text-muted">${message.time}</small>`;
-      a.dataset.id = message.id; // Adding ID to the message item
-      messageMenu.appendChild(a);
-  });
+function initMessages(data) {
+  if(data != null)
+  {
+    const dropdownElement = document.querySelector('#messageMenu');
+    dropdownElement.innerHTML = '';
+    data.data.forEach(message => {
+        const a = document.createElement('a');
+        a.className = 'dropdown-item';
+        a.href = message.link;
+        a.innerHTML = `${message.message} <small class="text-muted">${message.time}</small>`;
+        a.dataset.id = message.id; // Adding ID to the message item
+        dropdownElement.appendChild(a);
+    });
+    let badge = '';
+    if(data.totalData > 99)
+    {
+      badge = '99+';
+    }
+    else if(data.totalData > 0 && data.totalData <= 99)
+    {
+      badge = data.totalData;
+    }
+    dropdownElement.closest('li.nav-item').setAttribute('data-badge', badge);
+  }
 }
 
 /**
@@ -380,6 +487,8 @@ function initPage()
         } else {
             document.body.classList.toggle('sidebar-show'); // Hide or show the sidebar for small screens
         }
+        let hidden = document.body.classList.contains('sidebar-hidden');
+        window.localStorage.setItem('sidebarHidden', hidden ? 'true' : 'false');
     });
   });
 
@@ -387,6 +496,16 @@ function initPage()
   document.querySelector('.toggle-mode').addEventListener('click', () => {
       document.body.classList.toggle('dark-mode'); // Switch to dark mode
       document.body.classList.toggle('light-mode'); // Switch to light mode
+      let colorMode = '';
+      if(document.body.classList.contains('dark-mode'))
+      {
+        colorMode = 'dark-mode';
+      }
+      else
+      {
+        colorMode = 'light-mode';
+      }
+      window.localStorage.setItem('colorMode', colorMode);
   });
 }
 
@@ -396,8 +515,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initMessages(messages);
   initCheckAll();
   initAjaxSupport();
-  initDatetimePicker();
+  initMultipleInput();
   initMultipleSelect();
+  initDateTimePicker();
   initSortTable();
   initSortData();
   initOrderUrl(window.location.search);

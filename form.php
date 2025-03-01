@@ -1,3 +1,24 @@
+<?php
+require_once "TemplateDropdownMenu.php";
+
+// Example usage
+$notifications = [
+    'data' => [
+        ['id' => 1, 'message' => 'New comment on your post', 'time' => '2 minutes ago', 'link' => '/comment/1', 'timestamp'=>time()*1000],
+        ['id' => 2, 'message' => 'Your order has shipped', 'time' => '5 minutes ago', 'link' => '/order/123', 'timestamp'=>time()*1000],
+    ],
+    'totalData' => 8
+];
+
+$messages = [
+    'data' => [
+        ['id' => 1, 'message' => 'John Doe sent you a message', 'time' => '10 minutes ago', 'link' => '/message/1', 'timestamp'=>time()*1000],
+        ['id' => 2, 'message' => 'Jane Smith sent you a message', 'time' => '30 minutes ago', 'link' => '/message/2', 'timestamp'=>time()*1000],
+    ],
+    'totalData' => 5
+];
+
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -12,7 +33,6 @@
     <link rel="stylesheet" href="vendors/datetime-picker/bootstrap-datetimepicker.css">
     <link rel="stylesheet" href="vendors/fontawesome-free-6.5.2-web/css/all.min.css">
     <script src="js/MultiSelect.js"></script>
-    <script src="js/PicoTagEditor.js"></script>
     <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
     <script src="vendors/moment/min/moment.min.js"></script>
     <script src="vendors/datetime-picker/bootstrap-datetimepicker.js"></script>
@@ -94,32 +114,22 @@
     </div>
 
     <!-- Main Content -->
+    <?php
+    $dd = new TemplateDrowpdownMenu();
+    ?>
     <div class="content">
         <nav class="navbar navbar-expand navbar-light"> <!-- Navbar at the top -->
             <button class="btn btn-outline-secondary toggle-sidebar"><i class="fas fa-bars"></i></button>
             <!-- Button to toggle sidebar -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto"> <!-- Menu on the right side of the navbar -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button"
-                            data-toggle="dropdown">
-                            <i class="fas fa-bell"></i> <!-- Notification icon -->
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown"
-                            id="notificationMenu">
-                            <!-- Notifications will be populated by JavaScript -->
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button"
-                            data-toggle="dropdown">
-                            <i class="fas fa-comments"></i> <!-- Message icon -->
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messageDropdown"
-                            id="messageMenu">
-                            <!-- Messages will be populated by JavaScript -->
-                        </div>
-                    </li>
+                    
+                    <?php
+                    $ddmenu = new TemplateDrowpdownMenu();
+                    echo $ddmenu->dropdownMenu($notifications, 'notificationDropdown', 'notificationMenu', 'fas fa-bell'); // Output notifications
+                    echo $ddmenu->dropdownMenu($messages, 'messageDropdown', 'messageMenu', 'fas fa-comments'); // Output messages
+                    ?>
+                
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button"
                             data-toggle="dropdown">
@@ -164,28 +174,10 @@
                                 <option value="W">Woman</option>
                             </select></td>
                     </tr>
-                    
                     <tr>
                         <td>Birth Date</td>
                         <td><input class="form-control" type="date" name="birth_date" id="birth_date"
                                 data-mindate="2024-12-10"></td>
-                    </tr>
-                    <tr>
-                        <td>Hobby</td>
-                        <td><input type="text" name="hobby[]" class="form-control" data-multiple-input placeholder="Fill tags" data-initial-value='["mancing", "ngoding"]'></td>
-                    </tr>
-                    
-                    <tr>
-                        <td>History</td>
-                        <td><input type="date" name="history_date[]" class="form-control" data-multiple-input placeholder="Fill date" data-initial-value='["2018-01-01", "2025-09-07"]'></td>
-                    </tr>
-                    <tr>
-                        <td>History Time</td>
-                        <td><input type="time" name="history_time[]" class="form-control" data-multiple-input placeholder="Fill time" data-initial-value='["00:00:12", "21:00:23"]'></td>
-                    </tr>
-                    <tr>
-                        <td>History Date Time</td>
-                        <td><input type="datetime-local" name="history_datetime[]" class="form-control" data-multiple-input placeholder="Fill date time" data-initial-value='["2023-10-11 00:01:04", "2023-10-11 00:01:02"]'></td>
                     </tr>
                     <tr>
                         <td>Time Register</td>
@@ -219,10 +211,14 @@
                                 data-label-selected="selected" data-label-select-all="Select all" multiple
                                 data-multi-select>
                                 <option value="EN">English</option>
-                                <option value="ID" selected>Indonesian</option>
-                                <option value="JV">Javanese</option>
-                                <option value="JP" selected>Japanese</option>
-                                <option value="DE">Germany</option>
+                                <optgroup label="Asia">
+                                    <option value="ID">Indonesian</option>
+                                    <option value="JV">Javanese</option>
+                                    <option value="JP">Japanese</option>
+                                </optgroup>
+                                <optgroup label="Europa">
+                                    <option value="DE">Germany</option>
+                                </optgroup>
                             </select>
                         </td>
                     </tr>
@@ -282,6 +278,7 @@
                     <span class="filter-label">KTSK</span>
                     <span class="filter-control">
                         <select name="ktsk_id" class="form-control" multiple data-multi-select>
+                            <option value="">Pilih satu</option>
                             <option value="3">ABDI HAMDANI</option>
                             <option value="5">RIZKI NANDA</option>
                             <optgroup label="Anu">
