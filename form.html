@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="vendors/datetime-picker/bootstrap-datetimepicker.css">
     <link rel="stylesheet" href="vendors/fontawesome-free-6.5.2-web/css/all.min.css">
     <script src="js/MultiSelect.js"></script>
+    <script src="js/PicoTagEditor.js"></script>
     <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
     <script src="vendors/moment/min/moment.min.js"></script>
     <script src="vendors/datetime-picker/bootstrap-datetimepicker.js"></script>
@@ -163,10 +164,28 @@
                                 <option value="W">Woman</option>
                             </select></td>
                     </tr>
+                    
                     <tr>
                         <td>Birth Date</td>
                         <td><input class="form-control" type="date" name="birth_date" id="birth_date"
                                 data-mindate="2024-12-10"></td>
+                    </tr>
+                    <tr>
+                        <td>Hobby</td>
+                        <td><input type="text" name="hobby[]" class="form-control" data-multiple-input placeholder="Fill tags"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>History</td>
+                        <td><input type="date" name="history_date[]" class="form-control" data-multiple-input placeholder="Fill date"></td>
+                    </tr>
+                    <tr>
+                        <td>History Time</td>
+                        <td><input type="time" name="history_time[]" class="form-control" data-multiple-input placeholder="Fill time"></td>
+                    </tr>
+                    <tr>
+                        <td>History Date Time</td>
+                        <td><input type="datetime-local" name="history_datetime[]" class="form-control" data-multiple-input placeholder="Fill date time"></td>
                     </tr>
                     <tr>
                         <td>Time Register</td>
