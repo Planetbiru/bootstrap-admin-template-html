@@ -213,7 +213,7 @@ function initMultipleInput() {
   $('input[data-multiple-input]').each(function (index, element) {
       let obj = $(this);
       let isDateType = obj.is('input[type="date"], input[type="time"], input[type="datetime"], input[type="datetime-local"]');
-      let options = { maxHeight: 120, trimInput: isDateType, debug: true };
+      let options = { maxHeight: 120, trimInput: isDateType, debug: false };
       if(isDateType)
       {
         // Ensure the tag container is wider than the date-time picker.
@@ -250,12 +250,16 @@ function initMultipleInput() {
             inpuElement.datetimepicker(dpOptions)
                 .on('dp.change', () => inpuElement.datetimepicker('hide')) // Hide on change
                 .on('dp.enter', () => { // Handle "enter" event
-                    editor.addTag(inpuElement.val()); // Add entered value as a tag
+                  let val = inpuElement.val();
+                  if(val.trim() != '')
+                  {
+                    editor.addTag(val); // Add entered value as a tag
                     inpuElement.val(''); // Clear input field
                     if(!editor.settings.debug)
                     {
                       editor.timeout = setTimeout(() => container.setAttribute('data-focus', 'false'), 1500);
                     }
+                  }
                 });
         }
       });

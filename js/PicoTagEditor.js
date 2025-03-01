@@ -13,6 +13,9 @@
  * @param {Function} [callback] - A function to execute after initialization.
  */
 function PicoTagEditor(input, options, callback) {
+    if (['checkbox', 'radio', 'hidden', 'file'].includes(input.getAttribute('type'))) {
+        return;
+    }    
     options = options || {};
     /**
      * Configuration settings for the tag editor.
@@ -31,6 +34,8 @@ function PicoTagEditor(input, options, callback) {
         trimInput: false,
         ...options // Merge user-defined options
     };
+
+    this.initialValue = [];
 
     /**
      * Main container element for the tag editor.
@@ -89,7 +94,8 @@ function PicoTagEditor(input, options, callback) {
         // Create the tag editor container
         const tagEditorDiv = document.createElement('div');
         tagEditorDiv.classList.add('pico-tag-editor');
-
+        tagEditorDiv.setAttribute('data-focus', 'false');
+        let initialValue = input.getAttribute('data-initial-value') || '[]';
         // Clone the original input field
         const newInput = input.cloneNode(true);
 
@@ -124,7 +130,33 @@ function PicoTagEditor(input, options, callback) {
             // Ensure that the input element has the pico-tag-edit class.
             newInput.classList.add('pico-tag-edit');
         }
+        newInput.removeAttribute('name')
         this.placeholder = newInput.getAttribute('placeholder') || '';
+
+        if(initialValue == '')
+        {
+            initialValue = '[]';
+        }
+        try
+        {
+            this.initialValue = JSON.parse(initialValue);
+        }
+        catch(ex)
+        {
+            // Do nothing
+        }
+    };
+
+    /**
+     * Sets the initial values for the tag editor.
+     * If there are predefined initial values, they will be added as tags.
+     */
+    this.setInitialValue = function() {
+        if (this.initialValue.length > 0) {
+            for (let value of this.initialValue) {
+                this.addTag(value);
+            }
+        }
     };
 
     /**
@@ -146,10 +178,13 @@ function PicoTagEditor(input, options, callback) {
     
         // Handle "Enter" keypress to add a new tag
         inputField.addEventListener('keypress', event => {
-            if (event.key === 'Enter' && event.target.value.trim()) {
-                _this.addTag(_this.settings.trimInput ? event.target.value.trim() : event.target.value);
-                event.target.value = ''; // Clear input field after adding tag
+            if (event.key === 'Enter') {
                 event.preventDefault();
+                if(event.target.value.trim())
+                {
+                    _this.addTag(_this.settings.trimInput ? event.target.value.trim() : event.target.value);
+                    event.target.value = ''; // Clear input field after adding tag
+                }
             }
         });
     
@@ -248,4 +283,5 @@ function PicoTagEditor(input, options, callback) {
         callback(this.inputElement, this.containerElement, this);
     }
     this.addEvents();
+    this.setInitialValue();
 }
