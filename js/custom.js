@@ -222,7 +222,10 @@ function initMultipleInput() {
 
       // Initialize PicoTagEditor for each element
       let te = new PicoTagEditor(element, options, function (elem, container, editor) {
-        if (!isDateType) return;
+        if (!isDateType) 
+        {
+          return;
+        }
 
         let inpuElement = $(elem);
         let typeMap = { 'date': 'date', 'time': 'time', 'datetime': 'date-time', 'datetime-local': 'date-time' };
