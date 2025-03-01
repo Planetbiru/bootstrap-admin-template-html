@@ -100,18 +100,12 @@ function PicoTagEditor(input, options, callback) {
         tagsContainer.style.display = 'none'; // Initially hidden
 
         // Apply custom styles if defined in settings
-        if (this.settings.width) {
-            tagsContainer.style.width = this.isNumber(this.settings.width) ? `${this.settings.width}px` : this.settings.width;
-        }
-        if (this.settings.height) {
-            tagsContainer.style.height = this.isNumber(this.settings.height) ? `${this.settings.height}px` : this.settings.height;
-        }
-        if (this.settings.maxHeight) {
-            tagsContainer.style.maxHeight = this.isNumber(this.settings.maxHeight) ? `${this.settings.maxHeight}px` : this.settings.maxHeight;
-        }
-        if (this.settings.minWidth) {
-            tagsContainer.style.minWidth = this.isNumber(this.settings.minWidth) ? `${this.settings.minWidth}px` : this.settings.minWidth;
-        }
+        const styles = ['width', 'height', 'maxHeight', 'minWidth'];
+        styles.forEach(prop => {
+            if (this.settings[prop]) {
+                tagsContainer.style[prop] = this.isNumber(this.settings[prop]) ? `${this.settings[prop]}px` : this.settings[prop];
+            }
+        });
 
         // Append elements to the tag editor container
         tagEditorDiv.appendChild(newInput);
@@ -128,6 +122,7 @@ function PicoTagEditor(input, options, callback) {
         }
         if(!newInput.classList.contains('pico-tag-edit'))
         {
+            // Ensure that the input element has the pico-tag-edit class.
             newInput.classList.add('pico-tag-edit');
         }
         this.placeholder = newInput.getAttribute('placeholder') || '';
@@ -149,55 +144,35 @@ function PicoTagEditor(input, options, callback) {
      */
     this.addEvents = function () {
         const inputField = this.containerElement.querySelector('.pico-tag-edit');
-
         if (!inputField) return;
-
+    
         // Handle "Enter" keypress to add a new tag
-        inputField.addEventListener('keypress', function (event) {
-            if (event.key === 'Enter' && event.target.value.trim() !== '') {
-                let value = event.target.value;
-                if(_this.settings.trimInput)
-                {
-                    value = value.trim();
-                }
-                _this.addTag(value);
+        inputField.addEventListener('keypress', event => {
+            if (event.key === 'Enter' && event.target.value.trim()) {
+                _this.addTag(_this.settings.trimInput ? event.target.value.trim() : event.target.value);
                 event.target.value = ''; // Clear input field after adding tag
-
                 event.preventDefault();
-                event.stopImmediatePropagation();
-                event.stopPropagation();
             }
         });
-
+    
         // Handle focus state changes
-        inputField.addEventListener('focus', function () {
-            _this.containerElement.setAttribute('data-focus', 'true');
-        });
-
-        inputField.addEventListener('blur', function () {
+        inputField.addEventListener('focus', () => _this.containerElement.setAttribute('data-focus', 'true'));
+        inputField.addEventListener('blur', () => {
             _this.containerElement.setAttribute('data-focus', _this.settings.debug || _this.mouseEnter ? 'true' : 'false');
         });
-
+    
         // Track mouse enter and leave events for focus handling
-        this.containerElement.addEventListener('mouseenter', function () {
-            _this.mouseEnter = true;
-            if(typeof _this.timeout != 'undefined')
-            {
-                clearTimeout(_this.timeout)
-            }
-        });
-
-        this.containerElement.addEventListener('mouseleave', function () {
-            _this.mouseEnter = false;
-            if(typeof _this.timeout != 'undefined')
-            {
-                clearTimeout(_this.timeout)
-            }
-            _this.timeout = setTimeout(function(){
-                _this.containerElement.setAttribute('data-focus', 'false')
-            }, 1500);
+        ['mouseenter', 'mouseleave'].forEach(eventType => {
+            this.containerElement.addEventListener(eventType, () => {
+                _this.mouseEnter = eventType === 'mouseenter';
+                if (_this.timeout) clearTimeout(_this.timeout);
+                if (!_this.mouseEnter) {
+                    _this.timeout = setTimeout(() => _this.containerElement.setAttribute('data-focus', 'false'), 1500);
+                }
+            });
         });
     };
+    
 
     /**
      * Adds a new tag to the tag editor.
