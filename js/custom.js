@@ -230,7 +230,7 @@ function initMultipleInput() {
        * - `debug`: Enables or disables debug mode.
        * - `minWidth`: Ensures a minimum width when used with date/time pickers.
        */
-      let options = { maxHeight: 120, trimInput: isDateType, debug: false };
+      let options = { maxHeight: 120, trimInput: isDateType, clearOnHide: true, debug: false };
       if (isDateType) {
           // Ensure the tag container is wider than the date-time picker.
           options.minWidth = 260;
@@ -285,6 +285,7 @@ function initMultipleInput() {
                       }
                   });
           }
+
       });
   });
 }

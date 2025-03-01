@@ -1,16 +1,27 @@
 /**
- * PicoTagEditor constructor function.
- * Initializes the tag editor, transforming an input element into an interactive tag manager.
- * Users can add, edit, and remove tags dynamically.
- *
+ * PicoTagEditor - A lightweight, interactive tag editor.
+ * 
+ * This constructor function transforms a standard input element into an advanced tag management system, 
+ * allowing users to add, edit, and remove tags dynamically. The editor supports customizable settings 
+ * and integrates with form submissions by storing tag values in hidden inputs.
+ * 
+ * Features:
+ * - Converts an input field into a tag editor.
+ * - Supports tag input with optional trimming and validation.
+ * - Allows dynamic addition, removal, and display of tags.
+ * - Provides configurable settings for width, height, and behavior.
+ * - Integrates smoothly with form submissions.
+ * 
  * @param {HTMLElement} input - The input element to be transformed into a tag editor.
  * @param {Object} [options={}] - Optional configuration settings.
- * @param {boolean} [options.debug=false] - Enables or disables debugging features.
+ * @param {boolean} [options.debug=false] - Enables or disables debugging mode.
  * @param {string|number} [options.width] - The width of the tag editor container.
  * @param {string|number} [options.height] - The height of the tag editor container.
  * @param {string|number} [options.maxHeight] - The maximum height of the tag editor container.
- * @param {boolean} [options.trimInput=false] - Flag to trim input.
- * @param {Function} [callback] - A function to execute after initialization.
+ * @param {string|number} [options.minWidth] - The minimum width of the tag editor container.
+ * @param {boolean} [options.trimInput=false] - Determines whether input values should be trimmed before being added as tags.
+ * @param {boolean} [options.clearOnHide=false] - Specifies whether the input field should be cleared when the tag editor is hidden.
+ * @param {Function} [callback] - A function executed after initialization, receiving the input, container, and editor instance as arguments.
  */
 function PicoTagEditor(input, options, callback) {
     if (['checkbox', 'radio', 'hidden', 'file'].includes(input.getAttribute('type'))) {
@@ -23,12 +34,13 @@ function PicoTagEditor(input, options, callback) {
      * These settings can be customized via the `options` parameter.
      *
      * @type {Object}
-     * @property {boolean} debug - Whether debug mode is enabled.
+     * @property {boolean} debug - Indicates whether debug mode is enabled.
      * @property {string|number} width - The width of the tag editor.
      * @property {string|number} height - The height of the tag editor.
      * @property {string|number} minWidth - The minimum width of the tag editor.
      * @property {string|number} maxHeight - The maximum height of the tag editor.
-     * @property {boolean} trimInput - Whether to trim input values before adding them as tags.
+     * @property {boolean} trimInput - Determines whether input values should be trimmed before being added as tags.
+     * @property {boolean} clearOnHide - Specifies whether the input value should be cleared when the tag editor is hidden by a scheduler.
      */
     this.settings = {
         debug: false,
@@ -231,10 +243,7 @@ function PicoTagEditor(input, options, callback) {
         ['mouseenter', 'mouseleave'].forEach(eventType => {
             this.containerElement.addEventListener(eventType, () => {
                 _this.mouseEnter = eventType === 'mouseenter';
-                if (_this.timeout) 
-                {
-                    clearTimeout(_this.timeout);
-                }
+                _this.cancelHide();
                 if (!_this.mouseEnter && !_this.focus && !_this.settings.debug) {
                     _this.waitingForHide(1500);
                 }
@@ -244,15 +253,32 @@ function PicoTagEditor(input, options, callback) {
 
     /**
      * Delays hiding the tag editor container by setting a timeout.
-     * This function sets the `data-focus` attribute of the container to `false`
-     * after the specified waiting time, allowing a smooth transition effect.
+     * After the specified delay, it sets the `data-focus` attribute of the container to `false`,
+     * creating a smooth transition effect. If `clearOnHide` is enabled, it also clears the input field.
      *
      * @param {number} waitingTime - The delay time in milliseconds before hiding the container.
      */
     this.waitingForHide = function(waitingTime) {
-        this.timeout = setTimeout(() => _this.containerElement.setAttribute('data-focus', 'false'), waitingTime);
+        this.timeout = setTimeout(() => {
+            // Set container focus attribute to false to trigger hiding effect
+            _this.containerElement.setAttribute('data-focus', 'false');
+
+            // Clear input field if `clearOnHide` setting is enabled
+            if (_this.settings.clearOnHide) {
+                _this.inputElement.value = '';
+            }
+        }, waitingTime);
     };
 
+    /**
+     * Cancels the scheduled hiding of the tag editor container.
+     * If a timeout exists, it will be cleared to prevent the container from being hidden.
+     */
+    this.cancelHide = function() {
+        if (this.timeout) {
+            clearTimeout(this.timeout);
+        }
+    };
 
     /**
      * Adds a new tag to the tag editor.
@@ -295,10 +321,7 @@ function PicoTagEditor(input, options, callback) {
         this.updateValues();
         if(fromUser)
         {
-            if (this.timeout) 
-            {
-                clearTimeout(this.timeout);
-            }
+            this.cancelHide();
             this.containerElement.setAttribute('data-focus', 'true');
         }
     };
