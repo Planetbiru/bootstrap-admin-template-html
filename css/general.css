@@ -454,7 +454,7 @@ select:focus {
 }
 .dark-mode .form-control {
   background-color: #464646;
-  border-color: #212529;
+  border-color: #555;
   color: #e4e6e8;
 }
 .dark-mode .sidebar {

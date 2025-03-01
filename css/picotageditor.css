@@ -3,14 +3,10 @@
   vertical-align: top;
   display: inline-block;
   position: relative;
-}
-.pico-tag-editor .pico-tag-edit {
   width: 100%;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid;
-  box-sizing: border-box;
-  outline: none;
+}
+.pico-tag-editor .tags-container {
+  width: 100%;
 }
 .pico-tag-editor[data-focus=true] .tags-container {
   position: absolute;
@@ -46,11 +42,6 @@ table td .pico-tag-editor {
 }
 
 /* Default (Light Mode) */
-.light-mode .pico-tag-editor .pico-tag-edit {
-  border-color: #dbdbdb;
-  background-color: white;
-  color: #000;
-}
 .light-mode .pico-tag-editor[data-focus=true] .tags-container {
   background-color: rgb(255, 255, 255);
   border-color: #dbdbdb;
@@ -67,11 +58,6 @@ table td .pico-tag-editor {
 }
 
 /* Dark Mode */
-.dark-mode .pico-tag-editor .pico-tag-edit {
-  border-color: #555;
-  background-color: #464646;
-  color: #ddd;
-}
 .dark-mode .pico-tag-editor[data-focus=true] .tags-container {
   background-color: #464646;
   border-color: #555;

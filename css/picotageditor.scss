@@ -14,11 +14,17 @@ $dark-border: #555;
 $dark-bg: #464646;
 $dark-text: #ddd;
 
+
 .pico-tag-editor {
     text-align: left;
     vertical-align: top;
     display: inline-block;
     position: relative;
+    width: 100%;
+
+    .tags-container{
+        width: 100%;
+    }
 
     &[data-focus="true"] .tags-container {
         position: absolute;
@@ -32,6 +38,7 @@ $dark-text: #ddd;
     &[data-focus="false"] .tags-container {
         display: none;
     }
+    
 }
 table td .pico-tag-editor
 {
